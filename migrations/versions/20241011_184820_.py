@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 483f4f0b69b8
+Revision ID: 23eb73d4503d
 Revises:
-Create Date: 2024-10-10 15:33:45.904745
+Create Date: 2024-10-11 18:48:20.930842
 
 """
 from alembic import op
@@ -11,8 +11,10 @@ import sqlalchemy as sa
 import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
+
+
 # revision identifiers, used by Alembic.
-revision = '483f4f0b69b8'
+revision = '23eb73d4503d'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -32,10 +34,8 @@ def upgrade():
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-
     op.create_table('characters',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -80,7 +80,6 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE events SET SCHEMA {SCHEMA};")
-
     op.create_table('event_images',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('url', sa.String(length=255), nullable=False),
