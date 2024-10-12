@@ -19,6 +19,7 @@ class User(db.Model, UserMixin):
     updated_at = db.Column(db.DateTime(timezone=True), default=datetime.now(), nullable=False)
 
     characters = db.relationship("Character", back_populates="user", cascade="all, delete-orphan")
+    events = db.relationship("Event", back_populates="user", cascade="all, delete-orphan")
 
     @property
     def password(self):

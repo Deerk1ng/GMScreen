@@ -26,8 +26,6 @@ def level_range(form, field):
         raise ValidationError("Level must be 10 or lower")
 
 class CreateCharacterForm(FlaskForm):
-    id = IntegerField('id', validators=[DataRequired()])
-    user_id = IntegerField('user_id', validators=[DataRequired()])
     name = StringField('name', validators=[DataRequired()])
     level = IntegerField('level', validators=[DataRequired()])
     strength = IntegerField('strength', validators=[DataRequired(), ability_score_range])
