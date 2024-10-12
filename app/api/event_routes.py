@@ -7,7 +7,7 @@ from app.forms import CreateEventForm, CreateImageForm
 event_routes = Blueprint('events', __name__)
 
 @event_routes.route('/')
-@login_required
+# @login_required
 def events():
     """
         Query for all events and return them in a list of event dictionaries
