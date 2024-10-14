@@ -20,7 +20,12 @@ def events():
         image = db.session.query(EventImage).filter(EventImage.event_id == event.id).first()
 
         event_dict['image'] = image.to_dict()
-
+        if event_dict['start_date'].strftime("%b %d") == event_dict['end_date'].strftime("%b %d"):
+            event_dict['start_date'] = event_dict['start_date'].strftime("%A %b %d, %Y %-I:%M %p")
+            event_dict['end_date'] = event_dict['end_date'].strftime("%-I:%M %p")
+        else:
+            event_dict['start_date'] = event_dict['start_date'].strftime("%A %b %d, %Y %-I:%M %p")
+            event_dict['end_date'] = event_dict['end_date'].strftime("%A %b %d, %Y %-I:%M %p")
         events_list.append(event_dict)
 
     return {'events': events_list}, 200

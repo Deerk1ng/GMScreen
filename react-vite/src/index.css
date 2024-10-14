@@ -1,1 +1,70 @@
 /* TODO: Add sitewide styles */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');;
+
+* {
+    font-size: medium;
+    font-weight: normal;
+    font-family: "Montserrat", sans-serif;
+    font-style: normal;
+    background-color: #323643;
+    color: #f7f7f7;
+}
+body {
+    height: 100%;
+    margin: 50px;
+    scroll-behavior: smooth;
+}
+h1 {
+    font-size: 24pt;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+h2 {
+    font-size: 18pt;
+    font-weight: bold;
+    margin: 5px 0px
+}
+
+button {
+    font-size: normal;
+    text-align: center;
+    cursor: pointer;
+    background-color: white;
+    border-color: #cccccc;
+    color: #000000;
+    border-radius: 25px;
+    box-shadow: none;
+}
+button:disabled {
+    cursor:default;
+}
+input {
+    cursor: default;
+}
+
+
+
+/* error messages */
+.errors-msgs {
+    color: red;
+    font-size: .74rem;
+    font-weight: 500;
+
+}
+
+.first-color {
+	background: #323643;
+}
+
+.second-color {
+	color: #606470;
+}
+
+.third-color {
+	color: #93deff;
+}
+
+.fourth-color {
+	color: #f7f7f7;
+}

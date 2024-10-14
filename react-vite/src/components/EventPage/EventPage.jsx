@@ -12,13 +12,16 @@ const EventPage = () => {
     }, [dispatch]);
 
     return (
-        <>
+        <div className="events">
         {Object.values(events) ? Object.keys(events).map(key => (
-            <div className="event-container">
-                <div>{events[key].name}</div>
+            <div className="event-container" key={key}>
+                <h2 className="event-name">{events[key].name}</h2>
+                <h3 className="event-dates third-color">{events[key].start_date} - {events[key].end_date}</h3>
+                <div className="event-description">{events[key].description}</div>
+                <div className="event-capacity">capacity: {events[key].capacity}</div>
             </div>
         )): <h1>Loading...</h1>}
-        </>
+        </div>
     )
 }
 
