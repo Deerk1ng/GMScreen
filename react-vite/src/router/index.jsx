@@ -3,6 +3,7 @@ import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 import EventPage from '../components/EventPage'
+import CreateEventPage from '../components/CreateEventPage';
 
 export const router = createBrowserRouter([
   {
@@ -21,8 +22,17 @@ export const router = createBrowserRouter([
         element: <SignupFormPage />,
       },
       {
-        path:"/events",
-        element: <EventPage />
+        path:"events",
+        children: [
+          {
+            path: '',
+            element: <EventPage />,
+          },
+          {
+            path:'new',
+            element: <CreateEventPage />
+          }
+        ]
       }
     ],
   },
