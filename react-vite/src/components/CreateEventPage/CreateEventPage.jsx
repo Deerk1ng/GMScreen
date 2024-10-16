@@ -1,6 +1,7 @@
 import './CreateEventPage.css'
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
+import {useNavigate} from "react-router-dom"
 import { create_events_thunk } from '../../redux/events'
 
 const CreateEventPage = () => {
@@ -11,6 +12,7 @@ const CreateEventPage = () => {
     const [capacity, set_capacity] = useState(0)
     const [url, set_url] = useState('')
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [errors, setErrors] = useState({});
 
     const validateData = () => {
@@ -18,31 +20,41 @@ const CreateEventPage = () => {
 
         if(name.length < 5) error["name"] = "Name must be longer than 5 characters"
         if(name.length > 30) error["name"] = "Name must be longer than 5 characters"
-        if(isNaN(capacity) || price <=0) error["capacity"] = "Capacity must be a valid number"
+        if(isNaN(capacity) || capacity <=0) error["capacity"] = "Capacity must be a valid number"
         if(description.length < 10) error['description'] = "Description must be longer than 10 characters"
         if(description.length > 300 ) error['description'] = "Description must be less than 300 characters"
-
+        let sd = new Date(start_date)
+        let ed = new Date(end_date)
+        let now = Date.now()
+        if(sd < now) error['start-date'] = "Start date must be after today's date"
+        if(ed < now) error['end-date'] = "End date must be after today's date"
+        if (ed < sd) error['end-date'] = "End date must be after the start date"
+        setErrors(error)
+        return Object.keys(error).length == 0
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const new_event = {
-            name,
-            start_date,
-            end_date,
-            description,
-            capacity,
-            url
-        }
+        if(validateData()){
+            const new_event = {
+                name,
+                start_date,
+                end_date,
+                description,
+                capacity,
+                url
+            }
 
-        return dispatch(create_events_thunk(new_event))
-        .catch(async (res) => {
-            const data = await res
-            if (data && data.errors) {
-                setErrors(data.errors)
-            } else setErrors(data)
-        })
+            return dispatch(create_events_thunk(new_event))
+            .then(navigate('/events'))
+            .catch(async (res) => {
+                const data = await res
+                if (data && data.errors) {
+                    setErrors(data.errors)
+                } else setErrors(data)
+            })
+        }
     }
 
     return (
@@ -88,7 +100,7 @@ const CreateEventPage = () => {
                     />
             </div>
             <div>
-                <div className="label">Event Name</div>
+                <div className="label">Max Capacity</div>
                 <input
                     type="number"
                     value={capacity}

@@ -22,7 +22,7 @@ const removeEvent = (event_id) => ({
 
 //Thunk for action
 export const get_events_thunk = () => async (dispatch) => {
-    const res = await csrfFetch(`/api/events`)
+    const res = await csrfFetch(`/api/events/`)
     // console.log(res)
     if(res.ok) {
         const data = await res.json()
@@ -33,18 +33,20 @@ export const get_events_thunk = () => async (dispatch) => {
     return res.errors
 }
 
-export const create_events_thunk = (data) => async (dispatch) => {
-    let {name, start_date, end_date, description, capacity, url} = data
-    const res = await csrfFetch(`api/events`, {
+export const create_events_thunk = (event) => async (dispatch) => {
+    let {name, start_date, end_date, description, capacity, url} = event
+    let new_ev = {
+        name,
+        start_date: start_date.split("T").join(' ')+":00",
+        end_date: end_date.split("T").join(' ')+":00",
+        description,
+        capacity
+    }
+    // console.log(start_date.split("T").join(' ')+":00")
+    const res = await csrfFetch(`/api/events/`, {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-            name,
-            start_date,
-            end_date,
-            description,
-            capacity
-        })
+        body: JSON.stringify(new_ev)
     })
 
     const data = await res.json()
@@ -89,9 +91,9 @@ function events_reducer(state = initialState, action){
             new_state = structuredClone(state)
             new_state['all_events'][action.event.id] = action.event //needs testing
             return new_state
-        case ADD_EVENT:
+        case DELETE_EVENT:
             new_state = structuredClone(state)
-            delete new_state['all_events'][action.event.id]
+            delete new_state['all_events'][action.event_id]
             return new_state
         default:
             return state
