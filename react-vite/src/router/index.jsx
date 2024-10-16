@@ -2,6 +2,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
+import EventPage from '../components/EventPage'
+import CreateEventPage from '../components/CreateEventPage';
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +21,19 @@ export const router = createBrowserRouter([
         path: "signup",
         element: <SignupFormPage />,
       },
+      {
+        path:"events",
+        children: [
+          {
+            path: '',
+            element: <EventPage />,
+          },
+          {
+            path:'new',
+            element: <CreateEventPage />
+          }
+        ]
+      }
     ],
   },
 ]);

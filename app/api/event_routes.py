@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from app import db
 from app.models import Event, EventImage
 from app.forms import CreateEventForm, CreateImageForm
-
+from datetime import datetime
 event_routes = Blueprint('events', __name__)
 
 @event_routes.route('/')
@@ -18,9 +18,16 @@ def events():
         event_dict = event.to_dict()
 
         image = db.session.query(EventImage).filter(EventImage.event_id == event.id).first()
-
-        event_dict['image'] = image.to_dict()
-
+        if(image):
+            event_dict['image'] = image.to_dict()
+        else:
+            event_dict['image'] = []
+        if event_dict['start_date'].strftime("%b %d") == event_dict['end_date'].strftime("%b %d"):
+            event_dict['start_date'] = event_dict['start_date'].strftime("%A %b %d, %Y %-I:%M %p")
+            event_dict['end_date'] = event_dict['end_date'].strftime("%-I:%M %p")
+        else:
+            event_dict['start_date'] = event_dict['start_date'].strftime("%A %b %d, %Y %-I:%M %p")
+            event_dict['end_date'] = event_dict['end_date'].strftime("%A %b %d, %Y %-I:%M %p")
         events_list.append(event_dict)
 
     return {'events': events_list}, 200
@@ -56,6 +63,10 @@ def create_event():
     form = CreateEventForm()
 
     form['csrf_token'].data = request.cookies['csrf_token']
+    print(form.data['start_date'], form.data['end_date'])
+    # form.data['start_date'] = datetime(form.data['start_date'])
+    # form.data['end_date'] = datetime(form.data['end_date'])
+
 
     if form.validate_on_submit():
         event = Event(

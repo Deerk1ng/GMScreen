@@ -1,0 +1,22 @@
+.events {
+    display: flex;
+    flex-direction: column;
+    /* margin: 20px 50px; */
+    width: 75%;
+}
+
+.event-container {
+    margin: 10px 0px;
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.event-container > div {
+    margin-top: 10px;
+}
+
+.event-dates {
+    font-weight: bold;
+
+}
