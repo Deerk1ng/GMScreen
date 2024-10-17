@@ -1,19 +1,49 @@
-import './CreateEventPage.css'
-import { useDispatch } from "react-redux"
+import './UpdateEventPage.css'
+import { useDispatch, useSelector } from "react-redux"
+import { get_events_thunk, update_event_thunk } from "../../redux/events"
 import { useEffect, useState } from "react"
-import {useNavigate} from "react-router-dom"
-import { create_events_thunk } from '../../redux/events'
+import {useParams, useNavigate} from "react-router-dom"
 
-const CreateEventPage = () => {
+const UpdateEventPage = () => {
+    const {event_id} = useParams();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const user = useSelector(state => state.session.user)
+    const events = useSelector(state => state.events.all_events)
     const [name, set_name] = useState('')
     const [start_date, set_start_date] = useState()
     const [end_date, set_end_date] = useState()
     const [description, set_description] = useState('')
     const [capacity, set_capacity] = useState(0)
     const [url, set_url] = useState('')
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
     const [errors, setErrors] = useState({});
+    const [isLoaded, setIsLoaded] = useState(false)
+
+    useEffect(() => {
+        dispatch(get_events_thunk())
+        .then(setIsLoaded(true))
+    }, [dispatch, user]);
+
+    useEffect(() => {
+        if(events[event_id]) {
+            set_name(events[event_id].name)
+            let sd = new Date(events[event_id].start_date)
+            sd = sd.toISOString().slice(0, -1)
+            let ed = events[event_id].end_date
+            if(new Date(events[event_id].end_date) == 'Invalid Date'){
+                ed = sd.slice(0,11) + ed.toString().slice(0,-3) + ":00.000"
+
+            } else {
+                ed = new Date(events[event_id].end_date)
+                ed = ed.toISOString().slice(0, -1)
+            }
+            set_start_date(sd)
+            set_end_date(ed)
+            set_description(events[event_id].description)
+            set_capacity(events[event_id].capacity)
+            set_url(events[event_id].image?.url)
+        }
+    }, [events])
 
     const validateData = () => {
         const error = {}
@@ -38,6 +68,7 @@ const CreateEventPage = () => {
 
         if(validateData()){
             const new_event = {
+                id: event_id,
                 name,
                 start_date,
                 end_date,
@@ -45,8 +76,7 @@ const CreateEventPage = () => {
                 capacity,
                 url
             }
-
-            return dispatch(create_events_thunk(new_event))
+            return dispatch(update_event_thunk(new_event))
             .then(navigate('/events'))
             .catch(async (res) => {
                 const data = await res
@@ -128,4 +158,4 @@ const CreateEventPage = () => {
     )
 }
 
-export default CreateEventPage
+export default UpdateEventPage

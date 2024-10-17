@@ -4,6 +4,7 @@ import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 import EventPage from '../components/EventPage'
 import CreateEventPage from '../components/CreateEventPage';
+import UpdateEventPage from '../components/UpdateEventPage/UpdateEventPage';
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
           {
             path:'new',
             element: <CreateEventPage />
+          },
+          {
+            path: ':event_id/update',
+            element: <UpdateEventPage />
           }
         ]
       }
