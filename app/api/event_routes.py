@@ -24,7 +24,7 @@ def events():
             event_dict['image'] = []
         if event_dict['start_date'].strftime("%b %d") == event_dict['end_date'].strftime("%b %d"):
             event_dict['start_date'] = event_dict['start_date'].strftime("%A %b %d, %Y %-I:%M %p")
-            event_dict['end_date'] = event_dict['end_date'].strftime("%-I:%M %p")
+            event_dict['end_date'] = event_dict['end_date'].strftime("%I:%M %p")
         else:
             event_dict['start_date'] = event_dict['start_date'].strftime("%A %b %d, %Y %-I:%M %p")
             event_dict['end_date'] = event_dict['end_date'].strftime("%A %b %d, %Y %-I:%M %p")
@@ -63,10 +63,6 @@ def create_event():
     form = CreateEventForm()
 
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(form.data['start_date'], form.data['end_date'])
-    # form.data['start_date'] = datetime(form.data['start_date'])
-    # form.data['end_date'] = datetime(form.data['end_date'])
-
 
     if form.validate_on_submit():
         event = Event(
@@ -145,16 +141,13 @@ def edit_event(event_id):
     form = CreateEventForm()
 
     form['csrf_token'].data = request.cookies['csrf_token']
-
+    print("SJKHFSLDJFLSDF", form.data['start_date'], form.data['end_date'])
     if form.validate_on_submit():
         event_by_id.name = form.data['name']
-        event_by_id.price = form.data['start_date']
-
-        event_by_id.price = form.data['end_date']
-
+        event_by_id.start_date = form.data['start_date']
+        event_by_id.end_date = form.data['end_date']
         event_by_id.description = form.data['description']
-
-        event_by_id.category = form.data['capacity']
+        event_by_id.capacity = form.data['capacity']
 
         db.session.commit()
 

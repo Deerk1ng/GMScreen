@@ -23,10 +23,10 @@ const removeEvent = (event_id) => ({
 //Thunk for action
 export const get_events_thunk = () => async (dispatch) => {
     const res = await csrfFetch(`/api/events/`)
-    // console.log(res)
+
     if(res.ok) {
         const data = await res.json()
-        console.log(data)
+
         dispatch(getEvents(data.events))
         return data
     }
@@ -42,7 +42,6 @@ export const create_events_thunk = (event) => async (dispatch) => {
         description,
         capacity
     }
-    // console.log(start_date.split("T").join(' ')+":00")
     const res = await csrfFetch(`/api/events/`, {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
@@ -63,7 +62,7 @@ export const create_events_thunk = (event) => async (dispatch) => {
 }
 
 export const delete_event_thunk = (event_id) => async (dispatch) => {
-    const res = await csrfFetch(`api/events/${event_id}`,{
+    const res = await csrfFetch(`/api/events/${event_id}`,{
         method: "DELETE",
     })
 
@@ -72,6 +71,36 @@ export const delete_event_thunk = (event_id) => async (dispatch) => {
         return res
     }
     else return res.errors
+}
+
+export const update_event_thunk = (event) => async (dispatch) => {
+    let {id, name, start_date, end_date, description, capacity, url} = event
+    if(start_date.endsWith(".000")) start_date = start_date.split(':00')[0]
+    if(end_date.endsWith(".000")) end_date = end_date.split(':00')[0]
+    let new_ev = {
+        name,
+        start_date: start_date.split("T").join(' ') + ":00",
+        end_date: end_date.split("T").join(' ') + ":00",
+        description,
+        capacity
+    }
+    const res = await csrfFetch(`/api/events/${id}`, {
+        method: "PUT",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(new_ev)
+    })
+
+    const data = await res.json()
+    if(res.ok) {
+        let new_event = {...data.created_event}
+        if (url.length){
+            // add image here
+        }
+        dispatch(addEvent(new_event))
+        return new_event
+
+    }
+    return data.errors
 }
 
 //Initial State

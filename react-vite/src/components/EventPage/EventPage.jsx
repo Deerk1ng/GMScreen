@@ -4,15 +4,18 @@ import { get_events_thunk } from "../../redux/events"
 import { useEffect } from "react"
 import OpenModalButton from '../OpenModalButton/OpenModalButton'
 import DeleteEventModal from "../DeleteEventModal/DeleteEventModal"
+import { useNavigate } from "react-router-dom";
+
 
 const EventPage = () => {
     const events = useSelector(state => state.events.all_events)
     const user = useSelector(state => state.session.user)
     const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     useEffect(() => {
         dispatch(get_events_thunk());
-    }, [dispatch]);
+    }, [dispatch, user]);
 
     return (
         <div className="events">
@@ -28,11 +31,8 @@ const EventPage = () => {
                         className='delete-button'
                         modalComponent={<DeleteEventModal event_id={events[key].id} />}
                     />
-                    {/* <OpenModalButton
-                        buttonText="Update"
-                        className='delete-button'
-                        modalComponent={<UpdateEventModal event_id={events[key].id} review={rev} product={product}/>}
-                    /> */}
+                    <button onClick={() => navigate(`/events/${events[key].id}/update`)}>Update</button>
+                    <nav></nav>
                 </div> : <></>}
             </div>
         )): <h1>Loading...</h1>}
