@@ -19,7 +19,7 @@ class Event(db.Model):
 
     user = db.relationship("User", back_populates = "events")
     event_image = db.relationship("EventImage", back_populates= "event")
-
+    attendees = db.relationship("Attendee", back_populates='event')
 
     def to_dict(self):
         return {
