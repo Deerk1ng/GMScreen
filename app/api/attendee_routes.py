@@ -26,7 +26,6 @@ def edit_attendee_status(attendee_id):
 
     event_by_id = db.session.query(Event).filter(Event.id == att_dict['event_id']).first()
     event_dict = event_by_id.to_dict()
-    print('aslfkjhsadlfkjsdlkfjlsdkjf', event)
     if att_dict['user_id'] != curr_user['id']:
         return {'errors': {'message': 'Unauthorized to edit this attendance record'}}, 403
 
