@@ -2,10 +2,14 @@
     display: flex;
     flex-direction: column;
     /* margin: 20px 50px; */
-    width: 75%;
+    width: 95%;
+    margin: auto;
 }
 
-.event-container {
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     margin: 10px 0px;
     border: 2px solid;
     border-radius: 10px;
@@ -19,4 +23,46 @@
 .event-dates {
     font-weight: bold;
 
+}
+
+.event-img {
+    width: 200px;
+    height: 150px;
+    object-fit: contain;
+    margin-right: 25px;
+}
+
+.event-container {
+    width: 70%;
+}
+
+.attendance-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 15%;
+    margin-left: 15px;
+    margin-right: 25px;
+}
+
+.attendance {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.Owner {
+    color: #93deff;
+}
+
+.Attending {
+    color: #93ff98
+}
+
+.Unsure {
+    color: #ffdd93
+}
+
+.Not {
+    color: #ff9393
 }

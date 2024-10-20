@@ -39,7 +39,7 @@ def edit_attendee_status(attendee_id):
 
         db.session.commit()
 
-        return {'updated_attendance' : attendee_by_id.to_dict()}, 200
+        return {'updated_attendee' : attendee_by_id.to_dict()}, 200
 
     return {'errors': form.errors}, 400
 
