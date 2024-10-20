@@ -4,6 +4,8 @@ import { csrfFetch } from "./csrf";
 const GET_EVENTS = 'events/get_events'
 const ADD_EVENT = 'events/add_event'
 const DELETE_EVENT = 'events/delete_event'
+const ADD_ATTENDEE = "attendee/add_attendee"
+const DELETE_ATTENDEE = "attendee/delete_attendee"
 //Action creator
 const getEvents = (events) => ({
     type: GET_EVENTS,
@@ -18,6 +20,18 @@ const addEvent = (event) => ({
 const removeEvent = (event_id) => ({
     type: DELETE_EVENT,
     event_id
+})
+
+const addAttendee = (event_id, attendee) => ({
+    type: ADD_ATTENDEE,
+    event_id,
+    attendee
+})
+
+const deleteAttendee = (event_id, user_id) => ({
+    type: DELETE_ATTENDEE,
+    event_id,
+    user_id
 })
 
 //Thunk for action
@@ -73,6 +87,47 @@ export const delete_event_thunk = (event_id) => async (dispatch) => {
     else return res.errors
 }
 
+export const delete_attendee_thunk = (event_id, user_id, attendee_id) => async (dispatch) => {
+    const res = await csrfFetch(`/api/attendees/${attendee_id}`, {
+        method: 'DELETE'
+    })
+
+    if (res.ok) {
+        dispatch(deleteAttendee(event_id, user_id))
+        return res
+    }
+    else return res.errors
+}
+
+export const create_attendee_thunk = (event_id, attendee) => async (dispatch) => {
+    let {status, user_id, user} = attendee
+
+    let new_att = {
+        status : status.toLowerCase()
+    }
+
+    const res = await csrfFetch(`/api/events/${event_id}/attendees`, {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(new_att)
+    })
+
+    const data = await res.json()
+    if(res.ok) {
+        let stat = data.new_attendee['status']
+        let new_attendee = {
+            user,
+            user_id,
+            status: stat[0].toUpperCase() + stat.slice(1),
+            id: data.new_attendee['id']
+        }
+        dispatch(addAttendee(event_id, new_attendee))
+        return new_attendee
+    }
+    else return data.errors
+
+}
+
 export const update_event_thunk = (event) => async (dispatch) => {
     let {id, name, start_date, end_date, description, capacity, url} = event
     if(start_date.endsWith(".000")) start_date = start_date.split(':00')[0]
@@ -103,6 +158,33 @@ export const update_event_thunk = (event) => async (dispatch) => {
     return data.errors
 }
 
+export const update_attendee_thunk = (event_id, attendee) => async (dispatch) => {
+    let {attendee_id, status, user} = attendee
+
+    let new_att = {
+        status,
+    }
+
+    const res = await csrfFetch(`/api/attendees/${attendee_id}`, {
+        method:'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(new_att)
+    })
+
+    const data = await res.json()
+    if(res.ok) {
+        let stat = data.updated_attendee['status']
+        let new_attendee = {
+            ...data.updated_attendee,
+            status: stat[0].toUpperCase() + stat.slice(1),
+            user
+        }
+        dispatch(addAttendee(event_id, new_attendee))
+        return new_attendee
+    }
+    else return data.errors
+}
+
 //Initial State
 const initialState = { all_events: {} };
 
@@ -123,6 +205,14 @@ function events_reducer(state = initialState, action){
         case DELETE_EVENT:
             new_state = structuredClone(state)
             delete new_state['all_events'][action.event_id]
+            return new_state
+        case ADD_ATTENDEE:
+            new_state = structuredClone(state)
+            new_state['all_events'][action.event_id]['attendees'][action.attendee.user_id] = action.attendee
+            return new_state
+        case DELETE_ATTENDEE:
+            new_state = structuredClone(state)
+            delete new_state['all_events'][action.event_id]['attendees'][action.user_id]
             return new_state
         default:
             return state

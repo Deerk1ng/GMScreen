@@ -17,17 +17,17 @@ def events():
         event_dict = event.to_dict()
 
         attendees = db.session.query(Attendee).filter(Attendee.event_id == event.id).all()
-        attendee_list = []
+        attendee_list = {}
         for attendee in attendees:
             attendee_dict = attendee.to_dict()
             new_dict = {}
             user = db.session.query(User).filter(User.id == attendee_dict['user_id']).first()
             user = user.to_dict()
-            new_dict['user'] = user['username']
+            new_dict['user'] = user['username'].title()
             new_dict['user_id'] = attendee_dict['user_id']
-            new_dict['status'] = attendee_dict['status']
+            new_dict['status'] = attendee_dict['status'].title()
             new_dict['id'] = attendee_dict['id']
-            attendee_list.append(new_dict)
+            attendee_list[new_dict['user_id']] = new_dict
 
         event_dict['attendees'] = attendee_list
         image = db.session.query(EventImage).filter(EventImage.event_id == event.id).first()

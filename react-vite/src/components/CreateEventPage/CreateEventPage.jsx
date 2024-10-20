@@ -1,6 +1,6 @@
 import './CreateEventPage.css'
 import { useDispatch } from "react-redux"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import {useNavigate} from "react-router-dom"
 import { create_events_thunk } from '../../redux/events'
 
