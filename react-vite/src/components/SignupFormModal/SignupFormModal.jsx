@@ -26,7 +26,7 @@ function SignupFormModal() {
     const serverResponse = await dispatch(
       thunkSignup({
         email,
-        username,
+        name: username,
         password,
       })
     );
