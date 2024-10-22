@@ -20,12 +20,13 @@ const EventPage = () => {
 
     return (
         <div className="events">
+            <a href="/events/new">Create New Event</a>
         {Object.values(events) ? Object.keys(events).map(key => (
             <div className="container" key={key}>
-                {events[key].image.url ?
-                    <img className="event-img" src={events[key].image.url} alt="img associated with event" key={key}/>
+                {events[key].image?.url ?
+                    <img className="event-img" src={events[key].image.url} alt="img associated with event" key={`img-${key}`}/>
                 :<></>}
-                <div className="event-container" key={key}>
+                <div className="event-container" key={`event-${key}`}>
                     <h2 className="event-name">{events[key].name}</h2>
                     <h3 className="event-dates third-color">{events[key].start_date} - {events[key].end_date}</h3>
                     <div className="event-description">{events[key].description}</div>
@@ -46,7 +47,7 @@ const EventPage = () => {
                         <div className="attendance-self-status">Your Status: {events[key]['attendees'][user.id] ? <span className={events[key]['attendees'][user.id].status}>{events[key]['attendees'][user.id].status}</span>: <span className="Not">Not Attending</span>}</div>
                         <div> Other Attendees:
                             {Object.keys(events[key]['attendees']).map((attkey) => {
-                                return (<div className="attendance" key={key}>
+                                return (<div className="attendance" key={`attend-${attkey}`}>
                                     <div className="attendance-name">{events[key]['attendees'][attkey].user}:</div>
                                     <div className={`attendance-status ${events[key]['attendees'][attkey].status}`}>{events[key]['attendees'][attkey].status}</div>
                                 </div>)

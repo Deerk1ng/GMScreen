@@ -6,8 +6,8 @@ import { create_events_thunk } from '../../redux/events'
 
 const CreateEventPage = () => {
     const [name, set_name] = useState('')
-    const [start_date, set_start_date] = useState()
-    const [end_date, set_end_date] = useState()
+    const [start_date, set_start_date] = useState('')
+    const [end_date, set_end_date] = useState('')
     const [description, set_description] = useState('')
     const [capacity, set_capacity] = useState(0)
     const [url, set_url] = useState('')
