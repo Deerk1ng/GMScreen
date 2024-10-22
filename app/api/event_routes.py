@@ -278,6 +278,7 @@ def edit_image_for_event(event_id):
 
     event_by_id = db.session.query(Event).filter(Event.id == event_id).first()
 
+    print("safkdjhaskjfdhasfdhjlasjfa", event_by_id)
     if not event_by_id:
         return {'error': 'Event does not exist'}, 404
 
@@ -289,16 +290,14 @@ def edit_image_for_event(event_id):
     event_image = db.session.query(EventImage).filter(EventImage.event_id == event_id).first()
 
     if event_image:
-        event_image = event_image.to_dict()
         form = CreateImageForm()
-
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
-            event_image['url'] = form.data['url'],
-
+            event_image.url = form.data['url']
             db.session.commit()
-            updated_image = event_image
 
-            return {'new_image': updated_image}
+            updated_image = event_image.to_dict()
+
+            return {'new_image': updated_image}, 200
         return {'errors': form.errors}, 400
     return {'error': 'Event has no image'}, 404
