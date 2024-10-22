@@ -1,4 +1,4 @@
-import { csrfFetch } from "./csrf";
+import { csrfFetch } from "./csrf.js";
 
 //Action types
 const GET_EVENTS = 'events/get_events'
@@ -67,6 +67,17 @@ export const create_events_thunk = (event) => async (dispatch) => {
         let new_event = {...data.created_event}
         if (url.length){
             // add image here
+            const img_res = await csrfFetch(`/api/events/${new_event['id']}/images`,{
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    url
+                })
+            })
+            if(img_res.ok){
+                const data = img_res.json()
+                new_event['image'] = data['new_image']
+            }
         }
         dispatch(addEvent(new_event))
         return new_event
@@ -147,15 +158,29 @@ export const update_event_thunk = (event) => async (dispatch) => {
 
     const data = await res.json()
     if(res.ok) {
-        let new_event = {...data.created_event}
+        let new_event = {...data.updated_event}
         if (url.length){
             // add image here
-        }
-        dispatch(addEvent(new_event))
-        return new_event
 
+            let url_obj = {
+                url,
+                preview : false
+            }
+            const img_res = await csrfFetch(`/api/events/${new_event['id']}/images`,{
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(url_obj)
+            })
+            const data = img_res.json()
+            if(img_res.ok){
+                new_event['image'] = data['new_image']
+            }
+            dispatch(addEvent(new_event))
+            return new_event
+
+        }
+        return data.errors
     }
-    return data.errors
 }
 
 export const update_attendee_thunk = (event_id, attendee) => async (dispatch) => {

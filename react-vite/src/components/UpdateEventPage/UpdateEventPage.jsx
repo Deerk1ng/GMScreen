@@ -11,8 +11,8 @@ const UpdateEventPage = () => {
     const user = useSelector(state => state.session.user)
     const events = useSelector(state => state.events.all_events)
     const [name, set_name] = useState('')
-    const [start_date, set_start_date] = useState()
-    const [end_date, set_end_date] = useState()
+    const [start_date, set_start_date] = useState('')
+    const [end_date, set_end_date] = useState('')
     const [description, set_description] = useState('')
     const [capacity, set_capacity] = useState(0)
     const [url, set_url] = useState('')
@@ -28,14 +28,37 @@ const UpdateEventPage = () => {
         if(events[event_id]) {
             set_name(events[event_id].name)
             let sd = new Date(events[event_id].start_date)
-            sd = sd.toISOString().slice(0, -1)
+            let sd_year = sd.getFullYear()
+            let sd_month = sd.getMonth() + 1
+            if(sd_month < 10) sd_month = '0' + `${sd_month}`
+            let sd_day = sd.getDate()
+            if (sd_day < 10) sd_day = '0' + `${sd_day}`
+            let sd_hours = sd.getHours()
+            if (sd_hours < 10) sd_hours = '0' + `${sd_hours}`
+            let sd_minutes = sd.getMinutes()
+            if (sd_minutes < 10) sd_minutes = '0' + `${sd_minutes}`
+
+            sd = `${sd_year}-${sd_month}-${sd_day}T${sd_hours}:${sd_minutes}`
+
             let ed = events[event_id].end_date
             if(new Date(events[event_id].end_date) == 'Invalid Date'){
-                ed = sd.slice(0,11) + ed.toString().slice(0,-3) + ":00.000"
-
+                if(ed.slice(-2) == "PM"){
+                    let hr = Number(ed.slice(0,2)) + 12
+                    ed = sd.slice(0,11) + hr + ed.slice(2, -3)
+                } else {
+                    ed = sd.slice(0,11) + ed.slice(0,-3) + ":00.000"
+                }
             } else {
                 ed = new Date(events[event_id].end_date)
-                ed = ed.toISOString().slice(0, -1)
+                let ed_year = ed.getFullYear()
+                let ed_month = ed.getMonth() + 1
+                if(ed_month < 10) ed_month = '0' + `${ed_month}`
+                let ed_day = ed.getDate()
+                if (ed_day < 10) ed_day = '0' + `${ed_day}`
+                let ed_hours = ed.getHours()
+                if (ed_hours < 10) ed_hours = '0' + `${ed_hours}`
+                let ed_minutes = ed.getMinutes()
+                ed = `${ed_year}-${ed_month}-${ed_day}T${ed_hours}:${ed_minutes}`
             }
             set_start_date(sd)
             set_end_date(ed)
@@ -81,8 +104,11 @@ const UpdateEventPage = () => {
             .catch(async (res) => {
                 const data = await res
                 if (data && data.errors) {
+                    console.log(data.errors)
                     setErrors(data.errors)
-                } else setErrors(data)
+                } else {
+                    console.log(data)
+                    setErrors(data)}
             })
         }
     }
