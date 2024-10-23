@@ -87,7 +87,7 @@ export const create_events_thunk = (event) => async (dispatch) => {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(new_att)
         })
-        if(res.ok) {
+        if(att_res.ok) {
             const att_data = await att_res.json()
             let new_attendee = {
                 user,

@@ -38,7 +38,6 @@ const UpdateEventPage = () => {
             if (sd_hours < 10) sd_hours = '0' + `${sd_hours}`
             let sd_minutes = sd.getMinutes()
             if (sd_minutes < 10) sd_minutes = '0' + `${sd_minutes}`
-            if (sd_minutes < 10) sd_minutes = '0' + `${sd_minutes}`
 
             sd = `${sd_year}-${sd_month}-${sd_day}T${sd_hours}:${sd_minutes}`
 
