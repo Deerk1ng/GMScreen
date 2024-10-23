@@ -38,6 +38,7 @@ const UpdateEventPage = () => {
             if (sd_hours < 10) sd_hours = '0' + `${sd_hours}`
             let sd_minutes = sd.getMinutes()
             if (sd_minutes < 10) sd_minutes = '0' + `${sd_minutes}`
+            if (sd_minutes < 10) sd_minutes = '0' + `${sd_minutes}`
 
             sd = `${sd_year}-${sd_month}-${sd_day}T${sd_hours}:${sd_minutes}`
 
@@ -59,6 +60,7 @@ const UpdateEventPage = () => {
                 let ed_hours = ed.getHours()
                 if (ed_hours < 10) ed_hours = '0' + `${ed_hours}`
                 let ed_minutes = ed.getMinutes()
+                if (ed_minutes < 10) ed_minutes = '0' + `${ed_minutes}`
                 ed = `${ed_year}-${ed_month}-${ed_day}T${ed_hours}:${ed_minutes}`
             }
             set_start_date(sd)
