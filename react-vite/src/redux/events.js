@@ -140,7 +140,7 @@ export const create_attendee_thunk = (event_id, attendee) => async (dispatch) =>
 }
 
 export const update_event_thunk = (event) => async (dispatch) => {
-    let {id, name, start_date, end_date, description, capacity, url} = event
+    let {id, name, start_date, end_date, description, capacity, url, prev_url} = event
     if(start_date.endsWith(".000")) start_date = start_date.split(':00')[0]
     if(end_date.endsWith(".000")) end_date = end_date.split(':00')[0]
     let new_ev = {
@@ -159,9 +159,8 @@ export const update_event_thunk = (event) => async (dispatch) => {
     const data = await res.json()
     if(res.ok) {
         let new_event = {...data.updated_event}
-        if (url.length){
+        if (url.length && prev_url?.length){
             // add image here
-
             let url_obj = {
                 url,
                 preview : false
@@ -171,16 +170,35 @@ export const update_event_thunk = (event) => async (dispatch) => {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(url_obj)
             })
-            const data = img_res.json()
+            const img_data = await img_res.json()
             if(img_res.ok){
-                new_event['image'] = data['new_image']
+                new_event['image'] = img_data['new_image']
             }
-            dispatch(addEvent(new_event))
-            return new_event
-
+        }else if (url.length && !prev_url?.length) {
+                console.log("ATTEMPT TO POST INSTEAD OF PUT")
+                let url_obj = {
+                    url,
+                    preview : false
+                }
+                const img_add = await csrfFetch(`/api/events/${new_event['id']}/images`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(url_obj)
+                })
+                const img_data  = await img_add.json()
+                if(img_add.ok){
+                    new_event['image'] = img_data['new_image']
+                }
+        } else if (prev_url.length) {
+            const img_del_res = await csrfFetch(`/api/events/${new_event['id']}/images`, {
+                method: 'DELETE'
+            })
+            new_event['image'] = ''
         }
-        return data.errors
+        dispatch(addEvent(new_event))
+        return new_event
     }
+    return data.errors
 }
 
 export const update_attendee_thunk = (event_id, attendee) => async (dispatch) => {
