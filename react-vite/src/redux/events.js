@@ -48,7 +48,7 @@ export const get_events_thunk = () => async (dispatch) => {
 }
 
 export const create_events_thunk = (event) => async (dispatch) => {
-    let {name, start_date, end_date, description, capacity, url} = event
+    let {name, start_date, end_date, description, capacity, url, user_id, user} = event
     let new_ev = {
         name,
         start_date: start_date.split("T").join(' ')+":00",
@@ -78,6 +78,24 @@ export const create_events_thunk = (event) => async (dispatch) => {
                 const data = img_res.json()
                 new_event['image'] = data['new_image']
             }
+        }
+        let new_att = {
+            status : "owner"
+        }
+        const att_res = await csrfFetch(`/api/events/${new_event['id']}/attendees`, {
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(new_att)
+        })
+        if(res.ok) {
+            const att_data = await att_res.json()
+            let new_attendee = {
+                user,
+                user_id,
+                status: 'Owner',
+                id: att_data.new_attendee['id']
+            }
+            new_event['attendees'][new_attendee.id] = new_attendee
         }
         dispatch(addEvent(new_event))
         return new_event
@@ -175,7 +193,6 @@ export const update_event_thunk = (event) => async (dispatch) => {
                 new_event['image'] = img_data['new_image']
             }
         }else if (url.length && !prev_url?.length) {
-                console.log("ATTEMPT TO POST INSTEAD OF PUT")
                 let url_obj = {
                     url,
                     preview : false
