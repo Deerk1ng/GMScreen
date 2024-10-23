@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 33d86f36eb87
+Revision ID: 5bb55c867639
 Revises:
-Create Date: 2024-10-18 13:55:01.180775
+Create Date: 2024-10-22 21:20:03.876893
 
 """
 from alembic import op
@@ -14,7 +14,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = '33d86f36eb87'
+revision = '5bb55c867639'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -64,7 +64,6 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE characters SET SCHEMA {SCHEMA};")
-
     op.create_table('events',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -80,7 +79,6 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE events SET SCHEMA {SCHEMA};")
-
     op.create_table('attendees',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -92,7 +90,6 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE attendees SET SCHEMA {SCHEMA};")
-
     op.create_table('event_images',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('url', sa.String(length=255), nullable=False),
@@ -105,7 +102,6 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE event_images SET SCHEMA {SCHEMA};")
-
     # ### end Alembic commands ###
 
 

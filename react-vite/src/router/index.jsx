@@ -12,7 +12,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <h1>Welcome!</h1>,
+        element: <h1>Welcome! Please Log in or Sign up before proceeding. No features will work properly while logged out</h1>,
       },
       {
         path: "login",
