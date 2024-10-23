@@ -16,6 +16,7 @@ const UpdateEventPage = () => {
     const [description, set_description] = useState('')
     const [capacity, set_capacity] = useState(0)
     const [url, set_url] = useState('')
+    const [prev_url, setPrev] = useState('')
     const [errors, setErrors] = useState({});
     const [isLoaded, setIsLoaded] = useState(false)
 
@@ -65,6 +66,7 @@ const UpdateEventPage = () => {
             set_description(events[event_id].description)
             set_capacity(events[event_id].capacity)
             set_url(events[event_id].image?.url)
+            setPrev(events[event_id].image?.url)
         }
     }, [events])
 
@@ -83,6 +85,7 @@ const UpdateEventPage = () => {
         if(ed < now) error['end_date'] = "End date must be after today's date"
         if (ed < sd) error['end_date'] = "End date must be after the start date"
         setErrors(error)
+
         return Object.keys(error).length == 0
     }
 
@@ -97,7 +100,8 @@ const UpdateEventPage = () => {
                 end_date,
                 description,
                 capacity,
-                url
+                url,
+                prev_url
             }
             return dispatch(update_event_thunk(new_event))
             .then(navigate('/events'))

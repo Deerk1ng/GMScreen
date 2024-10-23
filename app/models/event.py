@@ -18,8 +18,8 @@ class Event(db.Model):
     updated_at = db.Column(db.DateTime(timezone=True), default=datetime.now(), nullable=False)
 
     user = db.relationship("User", back_populates = "events")
-    event_image = db.relationship("EventImage", back_populates= "event")
-    attendees = db.relationship("Attendee", back_populates='event')
+    event_image = db.relationship("EventImage", back_populates= "event", cascade="all, delete-orphan")
+    attendees = db.relationship("Attendee", back_populates='event', cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
