@@ -79,24 +79,24 @@ export const create_events_thunk = (event) => async (dispatch) => {
                 new_event['image'] = data['new_image']
             }
         }
-        let new_att = {
-            status : "owner"
-        }
-        const att_res = await csrfFetch(`/api/events/${new_event['id']}/attendees`, {
-            method: "POST",
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(new_att)
-        })
-        if(att_res.ok) {
-            const att_data = await att_res.json()
-            let new_attendee = {
-                user,
-                user_id,
-                status: 'Owner',
-                id: att_data.new_attendee['id']
-            }
-            new_event['attendees'][new_attendee.id] = new_attendee
-        }
+        // let new_att = {
+        //     status : "owner"
+        // }
+        // const att_res = await csrfFetch(`/api/events/${new_event['id']}/attendees`, {
+        //     method: "POST",
+        //     headers: {'Content-Type': 'application/json'},
+        //     body: JSON.stringify(new_att)
+        // })
+        // if(att_res.ok) {
+        //     const att_data = await att_res.json()
+        //     let new_attendee = {
+        //         user,
+        //         user_id,
+        //         status: 'Owner',
+        //         id: att_data.new_attendee['id']
+        //     }
+        //     new_event['attendees'][new_attendee.id] = new_attendee
+        // }
         dispatch(addEvent(new_event))
         return new_event
 
