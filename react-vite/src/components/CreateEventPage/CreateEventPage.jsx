@@ -1,5 +1,5 @@
 import './CreateEventPage.css'
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
 import {useNavigate} from "react-router-dom"
 import { create_events_thunk } from '../../redux/events'
@@ -14,6 +14,7 @@ const CreateEventPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [errors, setErrors] = useState({});
+    const user = useSelector(state => state.session.user)
 
     const validateData = () => {
         const error = {}
@@ -43,7 +44,9 @@ const CreateEventPage = () => {
                 end_date,
                 description,
                 capacity,
-                url
+                url,
+                user : user.username,
+                user_id : user.id
             }
 
             return dispatch(create_events_thunk(new_event))
