@@ -54,11 +54,14 @@ const EventPage = () => {
                             })}
                         </div>
                         {events[key]['attendees'][user.id] ?
-                            <OpenModalButton
-                            buttonText="Update Attendance Status"
-                            className='button'
-                            modalComponent={<UpdateAttendeeModal  event_id={key} attendee_id={events[key]['attendees'][user.id]['id']} curr_status={events[key]['attendees'][user.id]['status'].toLowerCase()} user={user} />}
-                            />
+                            <>{events[key]['attendees'][user.id]['status'] == 'Owner' ?
+                                <></> :
+                                <OpenModalButton
+                                buttonText="Update Attendance Status"
+                                className='button'
+                                modalComponent={<UpdateAttendeeModal  event_id={key} attendee_id={events[key]['attendees'][user.id]['id']} curr_status={events[key]['attendees'][user.id]['status'].toLowerCase()} user={user} />}
+                                />
+                            }</>
                         :
                             <OpenModalButton
                             buttonText="Sign Up to Attend"
