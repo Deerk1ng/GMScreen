@@ -231,6 +231,7 @@ export const add_event_image_thunk = (event_id, image) => async(dispatch) => {
         dispatch(deleteImage(event_id))
         return {'event_id' : event_id}
     }
+    return {'event_id' : event_id}
 }
 
 //Initial State
