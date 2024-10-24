@@ -53,7 +53,8 @@ const CreateEventPage = () => {
             }
             dispatch(create_events_thunk(new_event))
             .then((ev) => dispatch(create_attendee_thunk(ev.id, new_attendee)))
-            .then(navigate('/events'))
+
+            return (navigate('/events'))
         }
     }
 

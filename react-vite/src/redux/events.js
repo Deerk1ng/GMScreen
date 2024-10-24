@@ -79,24 +79,8 @@ export const create_events_thunk = (event) => async (dispatch) => {
                 new_event['image'] = data['new_image']
             }
         }
-        // let new_att = {
-        //     status : "owner"
-        // }
-        // const att_res = await csrfFetch(`/api/events/${new_event['id']}/attendees`, {
-        //     method: "POST",
-        //     headers: {'Content-Type': 'application/json'},
-        //     body: JSON.stringify(new_att)
-        // })
-        // if(att_res.ok) {
-        //     const att_data = await att_res.json()
-        //     let new_attendee = {
-        //         user,
-        //         user_id,
-        //         status: 'Owner',
-        //         id: att_data.new_attendee['id']
-        //     }
-        //     new_event['attendees'][new_attendee.id] = new_attendee
-        // }
+
+        new_event['attendees'] = {}
         dispatch(addEvent(new_event))
         return new_event
 
@@ -268,6 +252,8 @@ function events_reducer(state = initialState, action){
             return new_state
         case ADD_ATTENDEE:
             new_state = structuredClone(state)
+            console.log("new_state: ", new_state)
+            console.log(action.attendee.user_id)
             new_state['all_events'][action.event_id]['attendees'][action.attendee.user_id] = action.attendee
             return new_state
         case DELETE_ATTENDEE:
