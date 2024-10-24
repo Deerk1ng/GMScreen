@@ -59,7 +59,7 @@ export const get_events_thunk = () => async (dispatch) => {
 }
 
 export const create_events_thunk = (event) => async (dispatch) => {
-    let {name, start_date, end_date, description, capacity, url, user_id, user} = event
+    let {name, start_date, end_date, description, capacity} = event
     let new_ev = {
         name,
         start_date: start_date.split("T").join(' ')+":00",
@@ -139,7 +139,7 @@ export const create_attendee_thunk = (event_id, attendee) => async (dispatch) =>
 }
 
 export const update_event_thunk = (event) => async (dispatch) => {
-    let {id, name, start_date, end_date, description, capacity, url, prev_url} = event
+    let {id, name, start_date, end_date, description, capacity} = event
     if(start_date.endsWith(".000")) start_date = start_date.split(':00')[0]
     if(end_date.endsWith(".000")) end_date = end_date.split(':00')[0]
     let new_ev = {

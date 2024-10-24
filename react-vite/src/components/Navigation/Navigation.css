@@ -1,3 +1,66 @@
+/* Dropdown Menus */
 .profile-dropdown {
   position: absolute;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  cursor: default;
+  width: auto;
+  text-wrap: none;
+  text-align: left;
+  border-radius: 5px;
+  padding: 5px
+}
+
+.profile-dropdown > * {
+  margin: 5px;
+}
+.profile-items {
+  display: flex;
+  flex-direction: column;
+  padding: 3px;
+}
+.profile-items > * {
+  margin: 3px 0px;
+  padding-bottom: 3px
+}
+
+/* Logo */
+#logo-img {
+  width: 300px;
+  margin: 10px 50px;
+}
+
+
+/* Navigation Bar */
+.Nav-bar {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid rgb(188, 188, 188);
+  height: 100px;
+  margin: 0;
+}
+
+/* Profile Picture Icon */
+.pfp {
+  font-size: 25px;
+  margin: 5px;
+}
+
+.user-name {
+  font-weight: bold;
+}
+
+.button {
+  justify-self: center;
+}
+
+.logo-navs {
+  display: flex;
+  flex-direction: row;
+  align-items: center ;
+}
+
+#profile-btn {
+  margin-right: 100px
 }

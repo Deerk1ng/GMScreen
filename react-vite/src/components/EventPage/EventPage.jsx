@@ -20,7 +20,10 @@ const EventPage = () => {
 
     return (
         <div className="events">
-            <a href="/events/new">Create New Event</a>
+            <div>
+                <h1>Upcoming Events</h1>
+                <a href="/events/new">Create New Event</a>
+            </div>
         {Object.values(events) ? Object.keys(events).map(key => (
             <div className="container" key={key}>
                 {events[key].image?.url ?
@@ -45,14 +48,6 @@ const EventPage = () => {
                     {events[key].attendees ?
                     <div>
                         <div className="attendance-self-status">Your Status: {events[key]['attendees'][user.id] ? <span className={events[key]['attendees'][user.id].status}>{events[key]['attendees'][user.id].status}</span>: <span className="Not">Not Attending</span>}</div>
-                        <div> Other Attendees:
-                            {Object.keys(events[key]['attendees']).map((attkey) => {
-                                return (<div className="attendance" key={`attend-${attkey}`}>
-                                    <div className="attendance-name">{events[key]['attendees'][attkey].user}:</div>
-                                    <div className={`attendance-status ${events[key]['attendees'][attkey].status}`}>{events[key]['attendees'][attkey].status}</div>
-                                </div>)
-                            })}
-                        </div>
                         {events[key]['attendees'][user.id] ?
                             <>{events[key]['attendees'][user.id]['status'] == 'Owner' ?
                                 <></> :
@@ -69,6 +64,15 @@ const EventPage = () => {
                             modalComponent={<CreateAttendeeModal user_id={user.id} event_id={key} user_name={user.username} />}
                             />
                         }
+                        <div className="attendee-box"> Other Attendees:
+                            {Object.keys(events[key]['attendees']).map((attkey) => {
+                                return (<div className="attendance" key={`attend-${attkey}`}>
+                                    <div className="attendance-name">{events[key]['attendees'][attkey].user}:</div>
+                                    <div className={`attendance-status ${events[key]['attendees'][attkey].status}`}>{events[key]['attendees'][attkey].status}</div>
+                                </div>)
+                            })}
+                        </div>
+
                     </div>
                         : <></>
                     }
