@@ -2,7 +2,7 @@ import './CreateEventPage.css'
 import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
 import {useNavigate} from "react-router-dom"
-import { create_events_thunk } from '../../redux/events'
+import { create_attendee_thunk, create_events_thunk, add_event_image_thunk } from '../../redux/events'
 
 const CreateEventPage = () => {
     const [name, set_name] = useState('')
@@ -44,19 +44,21 @@ const CreateEventPage = () => {
                 end_date,
                 description,
                 capacity,
-                url,
+            }
+            const new_attendee = {
+                status: 'owner',
                 user : user.username,
                 user_id : user.id
             }
+            const new_image = {
+                url,
+                prev_url : '',
+            }
+            dispatch(create_events_thunk(new_event))
+            .then((ev) => dispatch(add_event_image_thunk(ev.id, new_image)))
+            .then((img_res) => dispatch(create_attendee_thunk(img_res.event_id, new_attendee)))
 
-            return dispatch(create_events_thunk(new_event))
-            .then(navigate('/events'))
-            .catch(async (res) => {
-                const data = await res
-                if (data && data.errors) {
-                    setErrors(data.errors)
-                } else setErrors(data)
-            })
+            return (navigate('/events'))
         }
     }
 
