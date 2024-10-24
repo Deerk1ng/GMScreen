@@ -1,6 +1,6 @@
 import './UpdateEventPage.css'
 import { useDispatch, useSelector } from "react-redux"
-import { get_events_thunk, update_event_thunk } from "../../redux/events"
+import { get_events_thunk, update_event_thunk, add_event_image_thunk, create_attendee_thunk } from "../../redux/events"
 import { useEffect, useState } from "react"
 import {useParams, useNavigate} from "react-router-dom"
 
@@ -101,20 +101,16 @@ const UpdateEventPage = () => {
                 end_date,
                 description,
                 capacity,
-                url,
-                prev_url
             }
-            return dispatch(update_event_thunk(new_event))
+            const new_image = {
+                url,
+                prev_url,
+            }
+
+            dispatch(update_event_thunk(new_event))
+            .then(dispatch(add_event_image_thunk(event_id, new_image)))
             .then(navigate('/events'))
-            .catch(async (res) => {
-                const data = await res
-                if (data && data.errors) {
-                    console.log(data.errors)
-                    setErrors(data.errors)
-                } else {
-                    console.log(data)
-                    setErrors(data)}
-            })
+
         }
     }
 

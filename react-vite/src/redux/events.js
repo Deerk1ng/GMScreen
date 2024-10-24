@@ -6,6 +6,8 @@ const ADD_EVENT = 'events/add_event'
 const DELETE_EVENT = 'events/delete_event'
 const ADD_ATTENDEE = "attendee/add_attendee"
 const DELETE_ATTENDEE = "attendee/delete_attendee"
+const ADD_IMAGE = "image/add_image"
+const DELETE_IMAGE = "image/delete_image"
 //Action creator
 const getEvents = (events) => ({
     type: GET_EVENTS,
@@ -32,6 +34,15 @@ const deleteAttendee = (event_id, user_id) => ({
     type: DELETE_ATTENDEE,
     event_id,
     user_id
+})
+const addImage = (event_id, image) => ({
+    type: ADD_IMAGE,
+    event_id,
+    image
+})
+const deleteImage = (event_id) => ({
+    type: DELETE_IMAGE,
+    event_id
 })
 
 //Thunk for action
@@ -65,27 +76,13 @@ export const create_events_thunk = (event) => async (dispatch) => {
     const data = await res.json()
     if(res.ok) {
         let new_event = {...data.created_event}
-        if (url.length){
-            // add image here
-            const img_res = await csrfFetch(`/api/events/${new_event['id']}/images`,{
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    url
-                })
-            })
-            if(img_res.ok){
-                const data = img_res.json()
-                new_event['image'] = data['new_image']
-            }
-        }
 
         new_event['attendees'] = {}
+        new_event['image'] = ''
         dispatch(addEvent(new_event))
         return new_event
 
-    }
-    return data.errors
+    } else return data.errors
 }
 
 export const delete_event_thunk = (event_id) => async (dispatch) => {
@@ -161,45 +158,10 @@ export const update_event_thunk = (event) => async (dispatch) => {
     const data = await res.json()
     if(res.ok) {
         let new_event = {...data.updated_event}
-        if (url.length && prev_url?.length){
-            // add image here
-            let url_obj = {
-                url,
-                preview : false
-            }
-            const img_res = await csrfFetch(`/api/events/${new_event['id']}/images`,{
-                method: 'PUT',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(url_obj)
-            })
-            const img_data = await img_res.json()
-            if(img_res.ok){
-                new_event['image'] = img_data['new_image']
-            }
-        }else if (url.length && !prev_url?.length) {
-                let url_obj = {
-                    url,
-                    preview : false
-                }
-                const img_add = await csrfFetch(`/api/events/${new_event['id']}/images`, {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(url_obj)
-                })
-                const img_data  = await img_add.json()
-                if(img_add.ok){
-                    new_event['image'] = img_data['new_image']
-                }
-        } else if (prev_url.length) {
-            const img_del_res = await csrfFetch(`/api/events/${new_event['id']}/images`, {
-                method: 'DELETE'
-            })
-            new_event['image'] = ''
-        }
+
         dispatch(addEvent(new_event))
         return new_event
-    }
-    return data.errors
+    }else return data.errors
 }
 
 export const update_attendee_thunk = (event_id, attendee) => async (dispatch) => {
@@ -227,6 +189,48 @@ export const update_attendee_thunk = (event_id, attendee) => async (dispatch) =>
         return new_attendee
     }
     else return data.errors
+}
+
+export const add_event_image_thunk = (event_id, image) => async(dispatch) => {
+    let {url, prev_url} = image
+    if (url.length && prev_url?.length){
+        // add image here
+        let url_obj = {
+            url,
+            preview : false
+        }
+        const img_res = await csrfFetch(`/api/events/${event_id}/images`,{
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(url_obj)
+        })
+        const img_data = await img_res.json()
+        if(img_res.ok){
+            dispatch(addImage(event_id, img_data['new_image']))
+            return img_data['new_image']
+        }
+    }else if (url.length && !prev_url?.length) {
+            let url_obj = {
+                url,
+                preview : false
+            }
+            const img_add = await csrfFetch(`/api/events/${event_id}/images`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(url_obj)
+            })
+            const img_data  = await img_add.json()
+            if(img_add.ok){
+                dispatch(addImage(event_id, img_data['new_image']))
+                return img_data['new_image']
+            }
+    } else if (prev_url.length) {
+        const img_del_res = await csrfFetch(`/api/events/${event_id}/images`, {
+            method: 'DELETE'
+        })
+        dispatch(deleteImage(event_id))
+        return {'event_id' : event_id}
+    }
 }
 
 //Initial State
@@ -259,6 +263,15 @@ function events_reducer(state = initialState, action){
         case DELETE_ATTENDEE:
             new_state = structuredClone(state)
             delete new_state['all_events'][action.event_id]['attendees'][action.user_id]
+            return new_state
+        case ADD_IMAGE:
+            new_state = structuredClone(state)
+            console.log("new_state: ", new_state)
+            new_state['all_events'][action.event_id]['image']= action.image
+            return new_state
+        case DELETE_IMAGE:
+            new_state = structuredClone(state)
+            new_state['all_events'][action.event_id]['image']  = ''
             return new_state
         default:
             return state
