@@ -107,7 +107,8 @@ const UpdateEventPage = () => {
 
             dispatch(update_event_thunk(new_event))
             .then(dispatch(add_event_image_thunk(event_id, new_image)))
-            .then(navigate('/events'))
+
+            return navigate('/events')
 
         }
     }
