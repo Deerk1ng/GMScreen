@@ -5,6 +5,7 @@ import Layout from './Layout';
 import EventPage from '../components/EventPage'
 import CreateEventPage from '../components/CreateEventPage';
 import UpdateEventPage from '../components/UpdateEventPage/UpdateEventPage';
+import LandingPage from '../components/LandingPage';
 
 export const router = createBrowserRouter([
   {
@@ -12,7 +13,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <h1>Welcome! Please Log in or Sign up before proceeding. No features will work properly while logged out</h1>,
+        element: <LandingPage />,
       },
       {
         path: "login",

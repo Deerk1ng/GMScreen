@@ -1,6 +1,6 @@
 import './UpdateEventPage.css'
 import { useDispatch, useSelector } from "react-redux"
-import { get_events_thunk, update_event_thunk, add_event_image_thunk, create_attendee_thunk } from "../../redux/events"
+import { get_events_thunk, update_event_thunk, add_event_image_thunk } from "../../redux/events"
 import { useEffect, useState } from "react"
 import {useParams, useNavigate} from "react-router-dom"
 
@@ -18,11 +18,9 @@ const UpdateEventPage = () => {
     const [url, set_url] = useState('')
     const [prev_url, setPrev] = useState('')
     const [errors, setErrors] = useState({});
-    const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
         dispatch(get_events_thunk())
-        .then(setIsLoaded(true))
     }, [dispatch, user]);
 
     useEffect(() => {
@@ -69,7 +67,7 @@ const UpdateEventPage = () => {
             set_url(events[event_id].image?.url)
             setPrev(events[event_id].image?.url)
         }
-    }, [events])
+    }, [events, event_id])
 
     const validateData = () => {
         const error = {}
@@ -109,7 +107,8 @@ const UpdateEventPage = () => {
 
             dispatch(update_event_thunk(new_event))
             .then(dispatch(add_event_image_thunk(event_id, new_image)))
-            .then(navigate('/events'))
+
+            return navigate('/events')
 
         }
     }
