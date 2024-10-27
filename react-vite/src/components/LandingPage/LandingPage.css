@@ -1,0 +1,27 @@
+.land-main {
+    margin: auto;
+    width: 80%;
+    text-align: center;
+}
+
+.land-desc {
+    margin: auto;
+    width: 60%;
+    margin-top: 30px;
+    font-size: larger;
+}
+
+.land-mod {
+    margin-top: 100px;
+    border: 5px solid #d7dcdf;
+    margin: 50px auto;
+    width: 25%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #323643;
+}
+
+.land-head {
+    background-color: #d7dcdf;
+}

@@ -30,14 +30,14 @@ function UpdateAttendeeModal({attendee_id, event_id, curr_status, user}) {
 
     return (
         <div className='attendee-modal'>
-            <h1>Choose your attendee status</h1>
+            <h2 className='prod-name'>Choose your attendee status</h2>
             <select name="status" id="status" value={status} onChange={(e) => setStatus(e.target.value)}>
-                <option value="">--Please choose an option--</option>
-                <option value="attending">Attending</option>
-                <option value="unsure">Unsure</option>
-                <option value="delete">No Longer Attending</option>
+                <option className='first-color' value="">--Please choose an option--</option>
+                <option className='first-color' value="attending">Attending</option>
+                <option className='first-color' value="unsure">Unsure</option>
+                <option className='first-color' value="delete">No Longer Attending</option>
             </select>
-            <button onClick={handleSubmit} disabled={status == "" || status == curr_status ? true : false}>Submit</button>
+            <button className='attending-button' onClick={handleSubmit} disabled={status == "" || status == curr_status ? true : false}>Submit</button>
         </div>
     )
 }

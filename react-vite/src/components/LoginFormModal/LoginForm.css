@@ -1,0 +1,21 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    margin: 5px auto;
+    width: 50%
+}
+
+.log-inp {
+    margin-left: 0px;
+    color: #323643;
+}
+
+.log-bttn {
+    margin: 10px;
+}
+
+.demo-button {
+    margin: 0px 10px 10px 20px;
+}

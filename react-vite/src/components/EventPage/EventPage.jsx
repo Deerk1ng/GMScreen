@@ -23,13 +23,13 @@ const EventPage = () => {
 
     return (<>
         {isLoaded ?
-            <div className="events">
-                <div>
-                    <h1>Upcoming Events</h1>
-                    <a href="/events/new">Create New Event</a>
+            <div className="events main-div">
+                <div className="row event-head">
+                    <h1 className="third-color">Upcoming Events</h1>
+                    <a className="create" href="/events/new">Create New Event</a>
                 </div>
             {Object.values(events) ? Object.keys(events).map(key => (
-                <div className="container" key={key}>
+                <div className="container row" key={key}>
                     {events[key].image?.url ?
                         <img className="event-img" src={events[key].image.url} alt="img associated with event" key={`img-${key}`}/>
                     :<></>}
@@ -70,7 +70,7 @@ const EventPage = () => {
                             }
                             <div className="attendee-box"> Other Attendees:
                                 {Object.keys(events[key]['attendees']).map((attkey) => {
-                                    return (<div className="attendance" key={`attend-${attkey}`}>
+                                    return (<div className="attendance row" key={`attend-${attkey}`}>
                                         <div className="attendance-name">{events[key]['attendees'][attkey].user}:</div>
                                         <div className={`attendance-status ${events[key]['attendees'][attkey].status}`}>{events[key]['attendees'][attkey].status}</div>
                                     </div>)
