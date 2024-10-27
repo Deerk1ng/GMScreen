@@ -1,3 +1,8 @@
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
 .events {
     display: flex;
     flex-direction: column;
@@ -5,10 +10,13 @@
     width: 95%;
     margin: auto;
 }
+.create {
+    align-self: center;
+    margin: 20px 50px;
+    padding-top: 15px
+}
 
 .container {
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
     margin: 5px 0px;
     border-bottom: 2px solid #606470;
@@ -51,12 +59,10 @@
     margin: 5px 0px;
     padding: 5px;
     height: 90px;
-    width: 250px;
+    width: 100%;
     overflow: auto;
 }
 .attendance {
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
 }
 

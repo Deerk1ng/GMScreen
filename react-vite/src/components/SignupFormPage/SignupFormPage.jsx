@@ -42,12 +42,13 @@ function SignupFormPage() {
 
   return (
     <>
-      <h1>Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
-      <form onSubmit={handleSubmit}>
+      <form className="login" onSubmit={handleSubmit}>
+        <h1>Sign Up</h1>
         <label>
           Email
           <input
+            className="log-inp"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -58,6 +59,7 @@ function SignupFormPage() {
         <label>
           Username
           <input
+            className="log-inp"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -68,6 +70,7 @@ function SignupFormPage() {
         <label>
           Password
           <input
+            className="log-inp"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -78,6 +81,7 @@ function SignupFormPage() {
         <label>
           Confirm Password
           <input
+            className="log-inp"
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -85,7 +89,7 @@ function SignupFormPage() {
           />
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+        <button className="log-bttn" type="submit">Sign Up</button>
       </form>
     </>
   );

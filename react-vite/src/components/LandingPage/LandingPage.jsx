@@ -9,25 +9,27 @@ import { useEffect } from 'react';
 const LandingPage = () => {
     const user = useSelector(state => state.session.user)
     const navigate = useNavigate()
+
     useEffect(() => {
         if(user) navigate('/events')
     }, [user])
+
     return (
-        <>
-            <h1>Welcome to Guild Meet</h1>
-            <div>Guild meet is a website designed to make planning for your nerdy events easy. Schedule events that your group mates can sign up to attend. In the future, campaign groups will be implemented, allowing for a more exclusive membership status and for private usage of the schedule feature. </div>
-            <div>
-                <h3>Register Today</h3>
-                <OpenModalButton
-                    buttonText="Log In"
-                    modalComponent={<LoginFormModal />}
-                />
+        <div className='main-div land-main'>
+            <h1 className='third-color'>Welcome to Guild Meet</h1>
+            <div className='land-desc'>Guild meet is a website designed to make planning for your nerdy events easy. Schedule events that your group mates can sign up to attend. In the future, campaign groups will be implemented, allowing for a more exclusive membership status and for private usage of the schedule feature. </div>
+            <div className='land-mod'>
+                <h2 className='land-head first-color'>Register Today</h2>
                 <OpenModalButton
                     buttonText="Sign Up"
                     modalComponent={<SignupFormModal />}
                 />
+                <OpenModalButton
+                    buttonText="Log in or Use A Demo account"
+                    modalComponent={<LoginFormModal />}
+                />
             </div>
-        </>
+        </div>
     )
 }
 

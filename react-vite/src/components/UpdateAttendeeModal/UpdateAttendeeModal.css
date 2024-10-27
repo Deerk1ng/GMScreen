@@ -1,0 +1,48 @@
+.attendee-modal {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    background-color: #323643;
+}
+
+#modal-content {
+    position: absolute;
+    top: 150px;
+    border-radius: 10px;
+    height: auto;
+    width: 450px;
+    background-color: #323643;
+    border: 2px solid #606470
+}
+
+.prod-name {
+    margin: 10px;
+    font-size: x-large;
+}
+
+#status {
+    height: auto;
+    width: auto;
+    border-radius: 5%;
+    resize: none;
+    margin: auto;
+    text-align: center;
+    color: #f7f7f7;
+    background-color: #606470;
+}
+
+.attending-button {
+    display: flex;
+    margin-top: 20px;
+    width: 40%;
+    margin: 20px auto ;
+    justify-content: center;
+    background-color: #93deff;
+    color: #323643;
+}
+
+.attending-button:disabled {
+    cursor:default;
+    background-color: #6c6f79;
+    color: #f7f7f7;
+}

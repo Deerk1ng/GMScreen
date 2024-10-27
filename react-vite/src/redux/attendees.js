@@ -1,7 +1,6 @@
 import { csrfFetch } from "./csrf.js";
 
 const GET_EVENTS = 'attendees/get_events'
-const ADD_EVENT = 'events/add_event'
 const DELETE_EVENT = 'events/delete_event'
 const ADD_ATTENDEE = "attendee/add_attendee"
 const DELETE_ATTENDEE = "attendee/delete_attendee"

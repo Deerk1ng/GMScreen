@@ -6,13 +6,17 @@
     font-weight: normal;
     font-family: "Montserrat", sans-serif;
     font-style: normal;
-    background-color: #323643;
     color: #f7f7f7;
 }
-body {
+html, body {
     height: 100%;
+}
+body {
+    background-color: #323643;
     margin: 50px;
     scroll-behavior: smooth;
+    display: flex;
+    flex-direction: column;
 }
 h1 {
     font-size: 24pt;
@@ -52,8 +56,18 @@ li {
     list-style: none;
 }
 
+.main-div {
+    flex: 1 0 auto;
+}
+footer {
+    flex-shrink: 0;
+    padding-bottom: 20px
+}
 
-
+#root {
+    display: flex;
+    flex-direction: column;
+}
 /* error messages */
 .errors-msgs {
     color: red;
