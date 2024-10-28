@@ -22,7 +22,6 @@ function UpdateAttendeeModal({attendee_id, event_id, curr_status, user}) {
             user: user.username
         }
 
-        console.log(curr_status)
 
         return dispatch(update_attendee_thunk(event_id, new_attendee))
                 .then(closeModal)

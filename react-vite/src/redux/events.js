@@ -257,8 +257,6 @@ function events_reducer(state = initialState, action){
             return new_state
         case ADD_ATTENDEE:
             new_state = structuredClone(state)
-            console.log("new_state: ", new_state)
-            console.log(action.attendee.user_id)
             new_state['all_events'][action.event_id]['attendees'][action.attendee.user_id] = action.attendee
             return new_state
         case DELETE_ATTENDEE:
@@ -267,7 +265,6 @@ function events_reducer(state = initialState, action){
             return new_state
         case ADD_IMAGE:
             new_state = structuredClone(state)
-            console.log("new_state: ", new_state)
             new_state['all_events'][action.event_id]['image']= action.image
             return new_state
         case DELETE_IMAGE:

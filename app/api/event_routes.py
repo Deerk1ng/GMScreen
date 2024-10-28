@@ -278,7 +278,6 @@ def edit_image_for_event(event_id):
 
     event_by_id = db.session.query(Event).filter(Event.id == event_id).first()
 
-    print("safkdjhaskjfdhasfdhjlasjfa", event_by_id)
     if not event_by_id:
         return {'error': 'Event does not exist'}, 404
 
