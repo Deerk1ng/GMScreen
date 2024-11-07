@@ -134,7 +134,7 @@ def add_image_to_event(event_id):
     event_by_id = event_by_id.to_dict()
 
     if event_by_id['user_id'] != curr_user['id']:
-        return {'errors': {'message': 'Unauthorized to edit this product'}}, 403
+        return {'errors': {'message': 'Unauthorized to edit this event'}}, 403
 
     event_image = image = db.session.query(EventImage).filter(EventImage.event_id == event_id).first()
 
@@ -233,14 +233,14 @@ def delete_event(event_id):
     event_by_id = db.session.query(Event).filter(Event.id == event_id).first()
 
     if not event_by_id:
-        return {'errors': {'message': 'Product does not exist'}}, 404
+        return {'errors': {'message': 'Event does not exist'}}, 404
 
     if event_by_id.user_id == currentUser['id']:
         db.session.delete(event_by_id)
         db.session.commit()
-        return {'message': "Event deleted successfuly"}, 200
+        return {'message': "Event deleted successfully"}, 200
 
-    return {'errors': {'message': 'Unauthorized to edit this product'}}, 403
+    return {'errors': {'message': 'Unauthorized to edit this event'}}, 403
 
 
 #delete event image
@@ -260,14 +260,14 @@ def delete_event_image(event_id):
     event_by_id = event_by_id.to_dict()
 
     if event_by_id['user_id'] != curr_user['id']:
-        return {'errors': {'message': 'Unauthorized to edit this product'}}, 403
+        return {'errors': {'message': 'Unauthorized to edit this event'}}, 403
 
     event_image = db.session.query(EventImage).filter(EventImage.event_id == event_id).first()
 
     if event_image:
         db.session.delete(event_image)
         db.session.commit()
-        return {'message': "Image deleted successfuly"}, 200
+        return {'message': "Image deleted successfully"}, 200
     return {'error': 'Event already has an image'}, 401
 
 #edit event image
@@ -284,7 +284,7 @@ def edit_image_for_event(event_id):
     event_by_id = event_by_id.to_dict()
 
     if event_by_id['user_id'] != curr_user['id']:
-        return {'errors': {'message': 'Unauthorized to edit this product'}}, 403
+        return {'errors': {'message': 'Unauthorized to edit this event'}}, 403
 
     event_image = db.session.query(EventImage).filter(EventImage.event_id == event_id).first()
 

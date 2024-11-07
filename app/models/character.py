@@ -47,6 +47,7 @@ class Character(db.Model):
             'wisdom' : self.wisdom,
             'charisma' : self.charisma,
             'character_class' : self.character_class,
+            'subclass' : self.subclass,
             'race' : self.race,
             'backstory' : self.backstory,
             'personality' : self.personality,
