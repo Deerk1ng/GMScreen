@@ -59,6 +59,8 @@
   display: flex;
   flex-direction: row;
   align-items: center ;
+  justify-content: space-between;
+  width: 35%
 }
 
 #profile-btn {
@@ -70,4 +72,10 @@
 .nav-event {
   font-weight: bolder;
   font-size: larger;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }

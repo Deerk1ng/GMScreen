@@ -10,11 +10,17 @@ function Navigation() {
   return (
     <div className="Nav-bar">
       <div className="logo-navs">
-        <NavLink to="/"><img id='logo-img' src="https://fontmeme.com/permalink/241024/6ac4da749ba09f45af122cba5b384dea.png" alt="Guild Meet Logo"></img></NavLink> {/* give image id='logo-img' */}
+        <div>
+          <NavLink to="/"><img id='logo-img' src="https://fontmeme.com/permalink/241024/6ac4da749ba09f45af122cba5b384dea.png" alt="Guild Meet Logo"></img></NavLink> {/* give image id='logo-img' */}
+        </div>
         {user && user.id ?
-        <div >
-            <NavLink className="nav-event" to="/events">Events</NavLink>
-        </div> : null}
+            <div>
+              <NavLink className="nav-event" to="/events">Events</NavLink>
+            </div> : null}
+        {user && user.id ?
+            <div>
+              <NavLink className="nav-event" to="/characters">Character</NavLink>
+            </div> : null}
       </div>
       <div>
         <ProfileButton />
