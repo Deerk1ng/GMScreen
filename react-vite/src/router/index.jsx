@@ -6,6 +6,7 @@ import EventPage from '../components/EventPage'
 import CreateEventPage from '../components/CreateEventPage';
 import UpdateEventPage from '../components/UpdateEventPage/UpdateEventPage';
 import LandingPage from '../components/LandingPage';
+import CharacterListPage from '../components/CharacterListPage';
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +39,19 @@ export const router = createBrowserRouter([
             path: ':event_id/update',
             element: <UpdateEventPage />
           }
+        ]
+      },
+      {
+        path:"characters",
+        children: [
+          {
+            path: '',
+            element: <CharacterListPage />,
+          },
+          {
+            path:'new',
+            element: <div>Coming soon</div>
+          },
         ]
       }
     ],

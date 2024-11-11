@@ -19,7 +19,7 @@ def get_curr_chars():
 
     characters = db.session.query(Character).filter(Character.user_id == curr_user['id']).all()
 
-    return {'characters' : char.to_dict() for char in characters}
+    return {'characters' : [char.to_dict() for char in characters]}
 
 # create a character
 @character_routes.route('/', methods=['POST'])
