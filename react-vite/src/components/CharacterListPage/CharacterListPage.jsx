@@ -10,17 +10,21 @@ const CharacterListPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [isLoaded, setIsLoaded] = useState(false);
+    const [currChar, setCurrChar] = useState(0)
+    const [charKeys, setCharKeys] = useState([])
+
 
     useEffect(() => {
         dispatch(get_chars_thunk())
         .then(() => setIsLoaded(true))
         }, [dispatch, user]);
 
-    return (<>
-        {isLoaded ?
-            <>
-            </> : null}
-    </>)
+    return (
+        <>
+            {isLoaded ?
+                <>
+                </> : <h1>Loading...</h1> }
+        </>)
 }
 
 export default CharacterListPage
