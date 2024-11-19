@@ -1,0 +1,87 @@
+.character-page {
+    border: 5px solid white;
+    width: 45%;
+}
+
+.char_sec {
+    border-bottom: 5px solid white;
+    padding: 10px;
+}
+
+.Deets {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.char_details {
+    font-weight: bold;
+    font-size: larger;
+    padding: 10px 5px;
+}
+
+.HP {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    padding: 20px 10px;
+}
+
+.hp {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid white;
+    height: 90px;
+    width: 90px;
+}
+.hp > div {
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.AS {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+}
+
+.abilities-container {
+    margin: 10px auto;
+    border: 2px solid white;
+    width: 40%;
+    padding: 15px 30px 20px 30px;
+    border-radius: 25%;
+}
+
+.abilities-container > div {
+    font-weight: bold;
+}
+
+.mod {
+    font-size: xxx-large;
+    width: 50%;
+    margin: auto;
+    padding: 10px;
+}
+
+.ascore {
+    border: 2px solid white;
+    border-radius: 100%;
+    width: 35px;
+    height: 30px;
+    margin: auto;
+    padding-top: 10px
+}
+
+.ability {
+    font-size: larger;
+}
+
+.char_desc {
+    padding: 10px;
+    font-weight: bold;
+}

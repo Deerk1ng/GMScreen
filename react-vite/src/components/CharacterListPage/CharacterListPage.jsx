@@ -10,19 +10,36 @@ const CharacterListPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [isLoaded, setIsLoaded] = useState(false);
-    const [currChar, setCurrChar] = useState(0)
+    const [currKey, setCurrKey] = useState(0)
     const [charKeys, setCharKeys] = useState([])
+    const [character, setCharacter] = useState({})
+    const [char_deets, setCharDeets] = useState({})
 
 
     useEffect(() => {
         dispatch(get_chars_thunk())
-        .then(() => setIsLoaded(true))
     }, [dispatch, user]);
 
     useEffect(() => {
         setCharKeys(Object.keys(characters))
-        setCurrChar(charKeys[0])
+        setCurrKey(charKeys[0])
     }, [characters])
+
+    useEffect(() => {
+        setCharacter(characters[currKey])
+        setIsLoaded(true)
+    }, [currKey])
+
+    useEffect(() => {
+        setCharDeets({
+            'hit-dice': 10,
+            'speed': 30,
+            'abilities': {},
+            'spellcaster': false,
+            'spells' : {},
+            'armor' : 15,
+        })
+    }, [character])
 
     const mod_conversion = (ascore) => {
         if (!Number(ascore)){
@@ -56,80 +73,87 @@ const CharacterListPage = () => {
         <>
         {isLoaded ?
         <>
-        {characters[currChar] ?
+        {character && char_deets ?
+        <>
+            <div className='character-selector'>
+                <div >Choose your character</div>
+                <select className='first-color' value={currKey} onChange={(e) => setCurrKey(e.target.value)}>
+                    <optgroup className='first-color' label="--Please choose a character--">
+                    {charKeys.map(key => (
+                        <option value={key} key={key}>{characters[key]['name']}</option>
+                    ))}
+                    </optgroup>
+                </select>
+            </div>
             <div className='character-page'>
                 <div className='char_sec Deets'>
-                    <div className='name'>{characters[currChar]['name']}</div>
-                    <div className='name'>{characters[currChar]['race']}</div>
-                    <div className='name'>{characters[currChar]['character_class']}</div>
-                    <div className='name'>{characters[currChar]['subclass']}</div>
-                    <div className='name'>Level: {characters[currChar]['level']}</div>
+                    <div className='char_details'>Name: {character['name']}</div>
+                    <div className='char_details'>Species: {character['race']}</div>
+                    <div className='char_details'>Class: {character['character_class']} | {character['subclass']}</div>
+                    <div className='char_details'>Level: {character['level']}</div>
                 </div>
                 <div className='char_sec HP'>
                     <div className='hp'>
                         <div>HP</div>
-                        <div></div>
+                        <div>{char_deets['hit-dice']+mod_conversion(character['constitution']) + ((char_deets['hit-dice']/ 2 +mod_conversion(character['constitution']))*character['level'])}</div>
                     </div>
                     <div className='hp'>
-                        <div>Armor Class</div>
-                        <div></div>
+                        <div>AC</div>
+                        <div>{char_deets['armor']}</div>
                     </div>
                     <div className='hp'>
                         <div>Hit Dice</div>
-                        <div></div>
+                        <div>{char_deets['hit-dice']}</div>
                     </div>
                     <div className='hp'>
-                        <div>Proficiency</div>
-                        <div>{prof_calculator(characters[currChar]['level'])}</div>
+                        <div>Prof.</div>
+                        <div>{prof_calculator(character['level'])}</div>
                     </div>
                     <div className='hp'>
                         <div>Speed</div>
-                        <div></div>
+                        <div>{char_deets['speed']}</div>
                     </div>
                 </div>
                 <div className='char_sec AS'>
                     <div className='abilities-container'>
+                        <div className='mod'>{mod_conversion(character['strength'])}</div>
+                        <div className='ascore'>{character['strength']}</div>
                         <div className='ability'>Strength</div>
-                        <div className='mod'>+{mod_conversion(characters[currChar]['strength'])}</div>
-                        <div className='ascore'>{characters[currChar]['strength']}</div>
                     </div>
                     <div className='abilities-container'>
+                        <div className='mod'>{mod_conversion(character['dexterity'])}</div>
+                        <div className='ascore'>{character['dexterity']}</div>
                         <div className='ability'>Dexterity</div>
-                        <div className='mod'>+{mod_conversion(characters[currChar]['dexterity'])}</div>
-                        <div className='ascore'>{characters[currChar]['dexterity']}</div>
                     </div>
                     <div className='abilities-container'>
+                        <div className='mod'>{mod_conversion(character['constitution'])}</div>
+                        <div className='ascore'>{character['constitution']}</div>
                         <div className='ability'>Constitution</div>
-                        <div className='mod'>+{mod_conversion(characters[currChar]['constitution'])}</div>
-                        <div className='ascore'>{characters[currChar]['constitution']}</div>
                     </div>
                     <div className='abilities-container'>
+                        <div className='mod'>{mod_conversion(character['intelligence'])}</div>
+                        <div className='ascore'>{character['intelligence']}</div>
                         <div className='ability'>Intelligence</div>
-                        <div className='mod'>+{mod_conversion(characters[currChar]['intelligence'])}</div>
-                        <div className='ascore'>{characters[currChar]['intelligence']}</div>
                     </div>
                     <div className='abilities-container'>
+                        <div className='mod'>{mod_conversion(character['wisdom'])}</div>
+                        <div className='ascore'>{character['wisdom']}</div>
                         <div className='ability'>Wisdom</div>
-                        <div className='mod'>+{mod_conversion(characters[currChar]['wisdom'])}</div>
-                        <div className='ascore'>{characters[currChar]['wisdom']}</div>
                     </div>
                     <div className='abilities-container'>
+                        <div className='mod'>{mod_conversion(character['charisma'])}</div>
+                        <div className='ascore'>{character['charisma']}</div>
                         <div className='ability'>Charisma</div>
-                        <div className='mod'>+{mod_conversion(characters[currChar]['charisma'])}</div>
-                        <div className='ascore'>{characters[currChar]['charisma']}</div>
                     </div>
                 </div>
                 <div className='char_sec DESC'>
-                    <div>Features</div>
-                    <div>Equipment</div>
-                    <div>Tool Proficiencies</div>
-                    <div>Appearance</div>
-                    <div>Backstory</div>
-                    <div>Personality</div>
+                    {character['appearance'] ? <div className='char_desc'>Appearance: <span>{character['appearance']}</span></div> : null}
+                    {character['backstory'] ? <div className='char_desc'>Backstory: <span>{character['backstory']}</span></div> : null}
+                    {character['personality'] ? <div className='char_desc'>Personality: <span>{character['personality']}</span></div> : null}
                 </div>
             </div>
-             : <div>
-                <div>currChar: {currChar}, charKeys: {charKeys}, character: {}</div>
+            </> : <div>
+                <div>currKey: {currKey}, charKeys: {charKeys}, character: {}</div>
              </div> }
         </>
         : <h1>Loading...</h1> }

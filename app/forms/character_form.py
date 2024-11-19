@@ -3,17 +3,17 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SelectField, TextAreaField
 from wtforms.validators import DataRequired, ValidationError
 
-class_choices = [('wizard', 'Wizard'),('rogue', 'Rogue'), ('paladin', 'Paladin')]
-race_choices = [('human', 'Human'), ('elf', 'Elf'), ('half-orc', 'Half-Orc'), ('goblin','Goblin')]
-subclass_choices = [('Abjuration', 'abjuration'),
-                    ('Conjuration', 'conjuration'),
-                    ('Divination', 'divination'),
-                    ('Thief', 'thief'),
-                    ('Assassin', 'assassin'),
-                    ('Arcane Trickster', 'arcane trickster'),
-                    ('Oath of Devotion', 'oath of devotion'),
-                    ('Oath of the Ancients', 'oath of the ancients'),
-                    ('Oath of Vengeance', 'oath of vengeance')]
+class_choices = [('Wizard'),('Rogue'), ('Paladin')]
+race_choices = [('Human'), ('Elf'), ('Half-Orc'), ('Goblin')]
+subclass_choices = [('Abjuration'),
+                    ('Conjuration'),
+                    ('Divination'),
+                    ('Thief'),
+                    ('Assassin'),
+                    ('Arcane Trickster'),
+                    ('Oath of Devotion'),
+                    ('Oath of the Ancients'),
+                    ('Oath of Vengeance')]
 
 def ability_score_range(form, field):
     ability_score = field.data
