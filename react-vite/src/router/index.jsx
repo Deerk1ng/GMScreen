@@ -7,6 +7,7 @@ import CreateEventPage from '../components/CreateEventPage';
 import UpdateEventPage from '../components/UpdateEventPage/UpdateEventPage';
 import LandingPage from '../components/LandingPage';
 import CharacterListPage from '../components/CharacterListPage';
+import CreateCharacterPage from '../components/CreateCharacterPage/CreateCharacterPage';
 
 export const router = createBrowserRouter([
   {
@@ -50,7 +51,7 @@ export const router = createBrowserRouter([
           },
           {
             path:'new',
-            element: <div>Coming soon</div>
+            element: <CreateCharacterPage />
           },
         ]
       }

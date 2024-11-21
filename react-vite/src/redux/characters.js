@@ -53,7 +53,7 @@ export const create_char_thunk = (character) => async (dispatch) => {
         appearance,
     }
 
-    const res = await csrfFetch(`/api/characters`, {
+    const res = await csrfFetch(`/api/characters/`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(new_char)

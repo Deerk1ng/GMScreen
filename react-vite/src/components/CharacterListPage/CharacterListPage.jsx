@@ -84,6 +84,7 @@ const CharacterListPage = () => {
                     ))}
                     </optgroup>
                 </select>
+                <a className="create" href="/characters/new">Create New Character</a>
             </div>
             <div className='character-page'>
                 <div className='char_sec Deets'>
