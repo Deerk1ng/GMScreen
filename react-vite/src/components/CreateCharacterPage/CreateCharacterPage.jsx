@@ -89,19 +89,16 @@ const CreateCharacterPage = () => {
                 <ul className="sections-scroll">
                     <li
                         className={`sections-form ${activeSection == 1 ? 'active' : ''}`}
-                        onClick={() => setActiveSection(1)}
                     >
                         Origin
                     </li>
                     <li
                         className={`sections-form ${activeSection == 2 ? 'active' : ''}`}
-                        onClick={() => setActiveSection(2)}
                     >
                         Ability Scores
                     </li>
                     <li
                         className={`sections-form ${activeSection == 3 ? 'active' : ''}`}
-                        onClick={() => setActiveSection(3)}
                     >
                         Background
                     </li>
