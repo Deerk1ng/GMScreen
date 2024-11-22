@@ -79,7 +79,7 @@ export const delete_character_thunk = (char_id) => async (dispatch) => {
 }
 
 export const update_character_thunk = (char) => async (dispatch) => {
-    let { name, level, strength, dexterity, constitution, intelligence, wisdom, charisma, character_class, subclass, race, backstory, personality, appearance} = character
+    let { name, level, strength, dexterity, constitution, intelligence, wisdom, charisma, character_class, subclass, race, backstory, personality, appearance} = char
     let new_char = {
         name,
         level,

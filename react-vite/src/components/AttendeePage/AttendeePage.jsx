@@ -11,7 +11,7 @@ import UpdateAttendeeModal from "../UpdateAttendeeModal"
 
 const AttendeePage = () => {
     const events = useSelector(state => state.attendee.attendee_events)
-    const other_events = useSelector(state => state.events.all_events)
+    // const other_events = useSelector(state => state.events.all_events)
     const user = useSelector(state => state.session.user)
     const dispatch = useDispatch();
     const navigate = useNavigate();
