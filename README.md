@@ -1,8 +1,22 @@
-# Flask React Project
+# ReadMe.md
 
-This is the starter for the Flask React project.
+## Links:
 
-## Getting started
+Github Repo: [GM Screen GitHub](https://github.com/Deerk1ng/GMScreen)
+
+Live Link: [Live Link](https://guild-meet.onrender.com/)
+
+## Technology Used
+This website uses a combination of many languages, frameworks, and packages to create a working backend API and frontend website. Some of these technologies include
+* Python
+* Flask
+* SQL Alchemy
+* React
+* Redux
+* AWS
+
+## Set Up
+### Getting started
 
 1. Clone this repository (only this branch).
 
@@ -52,80 +66,53 @@ This is the starter for the Flask React project.
    folder whenever you change your code, keeping the production version up to
    date.
 
-## Deployment through Render.com
+## Features
 
-First, recall that Vite is a development dependency, so it will not be used in
-production. This means that you must already have the __dist__ folder located in
-the root of your __react-vite__ folder when you push to GitHub. This __dist__
-folder contains your React code and all necessary dependencies minified and
-bundled into a smaller footprint, ready to be served from your Python API.
+### Events
 
-Begin deployment by running `npm run build` in your __react-vite__ folder and
-pushing any changes to GitHub.
+![image](https://github.com/user-attachments/assets/55f34428-4489-49cc-8d9b-d4289d12821a)
 
-Refer to your Render.com deployment articles for more detailed instructions
-about getting started with [Render.com], creating a production database, and
-deployment debugging tips.
+Users are automatically navigated to the events page once they've logged in. This page shows all upcoming events from any user on the site currently. A future campaigns feature will allow users to join groups and only see events those events
 
-From the Render [Dashboard], click on the "New +" button in the navigation bar,
-and click on "Web Service" to create the application that will be deployed.
+---
 
-Select that you want to "Build and deploy from a Git repository" and click
-"Next". On the next page, find the name of the application repo you want to
-deploy and click the "Connect" button to the right of the name.
+![image](https://github.com/user-attachments/assets/e6c2532c-3cc4-40dc-8006-c125abeb7f47)
 
-Now you need to fill out the form to configure your app. Most of the setup will
-be handled by the __Dockerfile__, but you do need to fill in a few fields.
+Creating an event requires a chosen title/reason, the date(s) and times the event is running for, a brief description, and capacity which in the future will affect how many users can attend.
 
-Start by giving your application a name.
+---
+![image](https://github.com/user-attachments/assets/d3fe268c-235c-4ed7-9425-4fe0a0595ff4)
 
-Make sure the Region is set to the location closest to you, the Branch is set to
-"main", and Runtime is set to "Docker". You can leave the Root Directory field
-blank. (By default, Render will run commands from the root directory.)
+Creating an event will automatically list you as the Owner and you will be unable to update your attendance. Users are also able to edit and delete any events they have created.
 
-Select "Free" as your Instance Type.
+## Attend Event
+ ![image](https://github.com/user-attachments/assets/91eb569e-d59b-47a9-be4a-b3f200fa9476)
 
-### Add environment variables
+Users can choose to attend any event or even place themselves as a maybe to try to save a spot
 
-In the development environment, you have been securing your environment
-variables in a __.env__ file, which has been removed from source control (i.e.,
-the file is gitignored). In this step, you will need to input the keys and
-values for the environment variables you need for production into the Render
-GUI.
+---
+![image](https://github.com/user-attachments/assets/46c1ec7b-156c-4ba0-af2e-7603ab7a8c1c)
 
-Add the following keys and values in the Render GUI form:
+Any user already attending can choose to rescind their RSVP. Unless they are an Owner of course!
 
-- SECRET_KEY (click "Generate" to generate a secure secret for production)
-- FLASK_ENV production
-- FLASK_APP app
-- SCHEMA (your unique schema name, in snake_case)
+---
+![image](https://github.com/user-attachments/assets/b69412fe-1d37-459a-8b63-88655a1b4402)
 
-In a new tab, navigate to your dashboard and click on your Postgres database
-instance.
+### Character Sheet
+Users have the ability to create a character. There are a few characters already provided for the demo account. Each character has a unique ability score set. In the future, users will be able to choose personalized equipment and spells to create a truly unique character. For now all equipment and many stats are preset based on class recommendations
 
-Add the following keys and values:
+![image](https://github.com/user-attachments/assets/62db3d7d-90df-40ef-bb12-94e6bfa512dc)
 
-- DATABASE_URL (copy value from the **External Database URL** field)
+The character creation is split up into three separate pages. Navigating back and forth is possible between pages however the site wont let you move to the next page until all information is filled in and valid.
 
-**Note:** Add any other keys and values that may be present in your local
-__.env__ file. As you work to further develop your project, you may need to add
-more environment variables to your local __.env__ file. Make sure you add these
-environment variables to the Render GUI as well for the next deployment.
+![image](https://github.com/user-attachments/assets/c934fa39-3534-4411-973f-774d7d5cf0d8)
+![image](https://github.com/user-attachments/assets/85474def-1f67-4e94-bbf2-74ce68e9036a)
+![image](https://github.com/user-attachments/assets/549ffcb7-d558-40ba-a842-e85942b6f3b9)
 
-### Deploy
+Once a character has been created, the page will navigate to the characters page with your newly created character selectable in the drop down menu.
 
-Now you are finally ready to deploy! Click "Create Web Service" to deploy your
-project. The deployment process will likely take about 10-15 minutes if
-everything works as expected. You can monitor the logs to see your Dockerfile
-commands being executed and any errors that occur.
-
-When deployment is complete, open your deployed site and check to see that you
-have successfully deployed your Flask application to Render! You can find the
-URL for your site just below the name of the Web Service at the top of the page.
-
-**Note:** By default, Render will set Auto-Deploy for your project to true. This
-setting will cause Render to re-deploy your application every time you push to
-main, always keeping it up to date.
-
-[Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/
+## Future Features
+* Campaign creation and invitations
+* GM Reference tables
+* Loot Tables and Encounter Tables
+* Wiki style World Atlas
