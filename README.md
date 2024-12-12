@@ -1,4 +1,5 @@
-# ReadMe.md
+# Guild Meet
+Guild Meet is a website designed to make planning for your nerdy events easy. Schedule events that your group mates can sign up to attend. In the future, campaign groups will be implemented, allowing for a more exclusive membership status and for private usage of the schedule feature.
 
 ## Links:
 
