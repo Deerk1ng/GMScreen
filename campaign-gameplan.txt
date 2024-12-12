@@ -1,0 +1,29 @@
+Adding Campaigns Gameplan
+
+Make campaigns table
+Make campaigns + characters join table
+Make campaign seed data
+Add campaign id to events
+Make campaign routes
+Add campaign page to website
+
+Campaign table:
+Name of campaign
+Owner id
+Campaign description
+
+Campaign + character join table
+Campaign id
+Character id
+
+Campaign routes
+-get campaign by id
+-get campaigns by user id
+-update/delete campaign
+-create campaign
+
+-add character to id by campaign id (only by campaign owner)
+-get characters by campaign id
+
+-create event by campaign id (only done by campaign owner)
+-get events by campaign id (include attendees)
