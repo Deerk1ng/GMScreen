@@ -21,6 +21,8 @@ class User(db.Model, UserMixin):
     characters = db.relationship("Character", back_populates="user", cascade="all, delete-orphan")
     events = db.relationship("Event", back_populates="user", cascade="all, delete-orphan")
     event_attending = db.relationship("Attendee", back_populates="user", cascade="all, delete-orphan")
+    campaigns = db.relationship("Campaign", back_populates="user", cascade="all, delete-orphan")
+
 
     @property
     def password(self):
