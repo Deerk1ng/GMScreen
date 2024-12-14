@@ -5,4 +5,4 @@ from .character import Character
 from .event import Event
 from .event_image import EventImage
 from .attendee import Attendee
-from .campaign import Campaign
+# from .campaign import Campaign

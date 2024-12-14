@@ -11,5 +11,5 @@ class Campaign_character(db.Model):
     character_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('characters.id'), ondelete='CASCADE'), nullable=False)
     campaign_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('campaigns.id'), ondelete='CASCADE'), nullable=False)
 
-    character = db.relationship("Character", back_populates = "campaign")
-    campaign = db.relationship("Campaign", back_populates= "characters")
+    # character = db.relationship("Character", back_populates = "campaign")
+    # campaign = db.relationship("Campaign", back_populates= "characters")
