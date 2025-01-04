@@ -14,4 +14,11 @@ def get_curr_campaigns():
 
     campaigns = db.session.query(Campaign).filter(Campaign.user_id == curr_user['id']).all()
 
-    return { 'campaigns' : [camp.to_dict() for camp in campaigns]}
+    return { 'curr_campaigns' : [camp.to_dict() for camp in campaigns]}
+
+@campaign_routes.route('/all')
+@login_required
+def get_all_campaigns():
+    campaigns = db.session.query(Campaign).all()
+
+    return { 'campaigns' : [camp.to_dict() for camp in campaigns] }
