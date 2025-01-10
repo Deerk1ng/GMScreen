@@ -22,3 +22,10 @@ def get_all_campaigns():
     campaigns = db.session.query(Campaign).all()
 
     return { 'campaigns' : [camp.to_dict() for camp in campaigns] }
+
+@campaign_routes.route('/', method=['PUT'])
+@login_required
+def make_campaign():
+    curr_user = current_user.to_dict()
+
+    return {curr_user}
