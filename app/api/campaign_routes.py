@@ -33,9 +33,9 @@ def make_campaign():
 
     if form.validate_on_submit():
         campaign = Campaign(
-        character_id = form.data['char_id'],
-        campaign_id = form.data['campaign_id'],
-        description = form.data['campaign']
+            user_id = curr_user['id'],
+            name = form.data['name'],
+            description = form.data['description']
         )
         db.session.add(campaign)
         db.session.commit()

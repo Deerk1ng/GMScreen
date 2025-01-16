@@ -10,6 +10,8 @@ class Campaign_character(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     character_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('characters.id'), ondelete='CASCADE'), nullable=False)
     campaign_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('campaigns.id'), ondelete='CASCADE'), nullable=False)
+    created_at = db.Column(db.DateTime(timezone=True), default=datetime.now(), nullable=False)
+    updated_at = db.Column(db.DateTime(timezone=True), default=datetime.now(), nullable=False)
 
     # character = db.relationship("Character", back_populates = "campaign")
     # campaign = db.relationship("Campaign", back_populates= "characters")
