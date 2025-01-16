@@ -4,7 +4,7 @@ from app import db
 from app.models import Campaign
 from flask_login import current_user, login_required
 #import forms
-from app.forms import CreateCharacterForm
+from app.forms import CreateCampaignForm
 campaign_routes = Blueprint('campaigns', __name__)
 
 @campaign_routes.route('/current')
@@ -28,4 +28,17 @@ def get_all_campaigns():
 def make_campaign():
     curr_user = current_user.to_dict()
 
-    return {curr_user}
+    form = CreateCampaignForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        campaign = Campaign(
+            user_id = curr_user['id'],
+            name = form.data['name'],
+            description = form.data['description']
+        )
+        db.session.add(campaign)
+        db.session.commit()
+        new_campaign = campaign.to_dict()
+        return {'new_campaign' : new_campaign}, 201
+    return {'errors' : form.errors}, 400
