@@ -25,7 +25,7 @@ h1 {
 }
 
 h2 {
-    font-size: 18pt;
+    font-size: 20pt;
     font-weight: bold;
     margin: 5px 0px
 }
@@ -85,11 +85,11 @@ footer {
 }
 
 .third-color {
-	color: #93deff;
+	color: #0d98d3;
 }
 
 .fourth-color {
-	color: #f7f7f7;
+	color: #000000;
 }
 
 .loading {
