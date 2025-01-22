@@ -4,3 +4,5 @@ from .character_form import CreateCharacterForm
 from .event_form import CreateEventForm
 from .add_image_form import CreateImageForm
 from .attendee_form import CreateAttendeeForm
+from .campaign_characters_form import CreateCampaignCharacterForm
+from .campaign_form import CreateCampaignForm
