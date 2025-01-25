@@ -23,7 +23,7 @@ def get_all_campaigns():
 
     return { 'campaigns' : [camp.to_dict() for camp in campaigns] }
 
-@campaign_routes.route('/', method=['PUT'])
+@campaign_routes.route('/', method=['POST'])
 @login_required
 def make_campaign():
     curr_user = current_user.to_dict()
@@ -42,3 +42,46 @@ def make_campaign():
         new_campaign = campaign.to_dict()
         return {'new_campaign' : new_campaign}, 201
     return {'errors' : form.errors}, 400
+
+@campaign_routes.route('<int:campaign_id>', method=['PUT'])
+@login_required
+def update_campaign(campaign_id):
+    curr_user = current_user.to_dict()
+
+    camp_by_id = db.session.query(Campaign).filter(Campaign.id == campaign_id).first()
+
+    if not camp_by_id:
+        return {'errors': {'message': 'Campaign does not exist'}}, 404
+
+    if camp_by_id.user_id != curr_user['id']:
+        return {'errors': {'message': 'Unauthorized to edit this campaign'}}, 403
+
+
+    form = CreateCampaignForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        camp_by_id.name = form.data['name'],
+        camp_by_id.description = form.data['description']
+
+        db.session.commit()
+        new_campaign = camp_by_id.to_dict()
+        return {'new_campaign' : new_campaign}, 201
+    return {'errors' : form.errors}, 400
+
+@campaign_routes.route('<int:campaign_id>', methods=['DELETE'])
+@login_required
+def delete_campaign(campaign_id):
+    curr_user = current_user.to_dict()
+
+    camp_by_id = db.session.query(Campaign).filter(Campaign.id == campaign_id).first()
+
+    if not camp_by_id:
+        return {'errors': {'message': 'Character does not exist'}}, 404
+
+    if camp_by_id.user_id == curr_user['id']:
+        db.session.delete(camp_by_id)
+        db.session.commit()
+        return {'message': "Campaign deleted successfully"}, 200
+
+    return {'errors': {'message': 'Unauthorized to delete this campaign'}}, 403
