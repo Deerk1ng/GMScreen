@@ -68,3 +68,20 @@ def update_campaign(campaign_id):
         new_campaign = camp_by_id.to_dict()
         return {'new_campaign' : new_campaign}, 201
     return {'errors' : form.errors}, 400
+
+@campaign_routes.route('<int:campaign_id>', methods=['DELETE'])
+@login_required
+def delete_campaign(campaign_id):
+    curr_user = current_user.to_dict()
+
+    camp_by_id = db.session.query(Campaign).filter(Campaign.id == campaign_id).first()
+
+    if not camp_by_id:
+        return {'errors': {'message': 'Character does not exist'}}, 404
+
+    if camp_by_id.user_id == curr_user['id']:
+        db.session.delete(camp_by_id)
+        db.session.commit()
+        return {'message': "Campaign deleted successfully"}, 200
+
+    return {'errors': {'message': 'Unauthorized to delete this campaign'}}, 403
