@@ -1,7 +1,7 @@
 # routes
 from flask import Blueprint, jsonify, redirect, request
 from app import db
-from app.models import Campaign
+from app.models import Campaign, Character
 from flask_login import current_user, login_required
 #import forms
 from app.forms import CreateCampaignForm
@@ -85,3 +85,13 @@ def delete_campaign(campaign_id):
         return {'message': "Campaign deleted successfully"}, 200
 
     return {'errors': {'message': 'Unauthorized to delete this campaign'}}, 403
+
+@campaign_routes.route('/<int:campaign_id/characters')
+@login_required
+def get_campaign_chars(campaign_id):
+
+    campaigns = db.session.query(Campaign).filter(Campaign.id == campaign_id).first()
+
+    characters = db.session.query(Character).filter(Character.campaign_id == campaign_id).all()
+
+    return { 'curr_campaigns' : [char.to_dict() for char in characters]}
