@@ -90,8 +90,18 @@ def delete_campaign(campaign_id):
 @login_required
 def get_campaign_chars(campaign_id):
 
-    campaigns = db.session.query(Campaign).filter(Campaign.id == campaign_id).first()
+    camp_by_id = db.session.query(Campaign).filter(Campaign.id == campaign_id).first()
+
+    if not camp_by_id:
+        return {'errors': {'message': 'Character does not exist'}}, 404
 
     characters = db.session.query(Character).filter(Character.campaign_id == campaign_id).all()
 
     return { 'curr_campaigns' : [char.to_dict() for char in characters]}
+
+@campaign_routes.route('/<int:campaign_id/characters/new')
+@login_required
+def add_campaign_chars(campaign_id):
+    campaigns = db.session.query(Campaign).filter(Campaign.id == campaign_id).first()
+
+    return {campaigns}
