@@ -1,7 +1,7 @@
 # routes
 from flask import Blueprint, jsonify, redirect, request
 from app import db
-from app.models import Character
+from app.models import Character, Campaign
 from flask_login import current_user, login_required
 #import forms
 from app.forms import CreateCharacterForm
@@ -123,3 +123,5 @@ def delete_char(char_id):
 # get all characters by event id
 
 # get all characters of current campaign (?)
+
+# add character to campaign

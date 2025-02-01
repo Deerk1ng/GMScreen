@@ -1,10 +1,10 @@
 # routes
 from flask import Blueprint, jsonify, redirect, request
 from app import db
-from app.models import Campaign
+from app.models import Campaign, Character
 from flask_login import current_user, login_required
 #import forms
-from app.forms import CreateCampaignForm
+from app.forms import CreateCampaignForm, CreateCampaignCharacterForm
 campaign_routes = Blueprint('campaigns', __name__)
 
 @campaign_routes.route('/current')
@@ -85,3 +85,27 @@ def delete_campaign(campaign_id):
         return {'message': "Campaign deleted successfully"}, 200
 
     return {'errors': {'message': 'Unauthorized to delete this campaign'}}, 403
+
+@campaign_routes.route('/<int:campaign_id/characters')
+@login_required
+def get_campaign_chars(campaign_id):
+
+    camp_by_id = db.session.query(Campaign).filter(Campaign.id == campaign_id).first()
+
+    if not camp_by_id:
+        return {'errors': {'message': 'Character does not exist'}}, 404
+
+    characters = db.session.query(Character).filter(Character.campaign_id == campaign_id).all()
+
+    return { 'curr_campaigns' : [char.to_dict() for char in characters]}
+
+@campaign_routes.route('/<int:campaign_id/characters/new')
+@login_required
+def add_campaign_chars(campaign_id):
+    campaigns = db.session.query(Campaign).filter(Campaign.id == campaign_id).first()
+
+    form = CreateCampaignCharacterForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+
+    return {campaigns}
