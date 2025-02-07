@@ -106,6 +106,14 @@ def add_campaign_chars(campaign_id):
 
     # form = CreateCampaignCharacterForm()
     # form['csrf_token'].data = request.cookies['csrf_token']
-
+    # need character_id, campaign_id
+    # if form.validate_on_submit():
+    #     camp_char = Campaign_Character(
+    #         campaign_id,
+    #         character_id = form.data['character_id'],
+    #     )
+    #     db.session.add(camp_char)
+    #     db.session.commit()
+    #     return {'Character has been added to the campaign!'}, 201
 
     return {campaigns}
