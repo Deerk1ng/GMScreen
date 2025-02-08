@@ -1,5 +1,5 @@
 # routes
-from flask import Blueprint, jsonify, redirect, request
+from flask import Blueprint, request
 from app import db
 from app.models import Campaign, Character
 from flask_login import current_user, login_required
