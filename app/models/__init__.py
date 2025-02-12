@@ -6,3 +6,4 @@ from .event import Event
 from .event_image import EventImage
 from .attendee import Attendee
 from .campaign import Campaign
+from .campaign_character import Campaign_character

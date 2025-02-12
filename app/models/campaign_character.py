@@ -13,5 +13,5 @@ class Campaign_character(db.Model):
     created_at = db.Column(db.DateTime(timezone=True), default=datetime.now(), nullable=False)
     updated_at = db.Column(db.DateTime(timezone=True), default=datetime.now(), nullable=False)
 
-    # character = db.relationship("Character", back_populates = "campaign")
-    # campaign = db.relationship("Campaign", back_populates= "characters")
+    character = db.relationship("Character", back_populates = "campaign")
+    campaign = db.relationship("Campaign", back_populates= "characters")
