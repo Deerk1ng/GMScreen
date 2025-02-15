@@ -15,7 +15,7 @@ class Campaign(db.Model):
     updated_at = db.Column(db.DateTime(timezone=True), default=datetime.now(), nullable=False)
 
     user = db.relationship("User", back_populates = "campaigns")
-    # characters = db.relationship("Campaign_character", back_populates='campaign', cascade="all, delete-orphan")
+    characters = db.relationship("Campaign_character", back_populates='campaign', cascade="all, delete-orphan")
 
     def to_dict(self):
         return {

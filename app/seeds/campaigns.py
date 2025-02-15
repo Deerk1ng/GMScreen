@@ -5,13 +5,16 @@ from sqlalchemy.sql import text
 def seed_campaigns():
     campaigns = {
         "Modern Magic": {
-            "description" : "A fantasy world with a modern twist! Go on dragon slaying adventures with access to technology like trains, skyscrapers, and even phones"
+            "description" : "A fantasy world with a modern twist! Go on dragon slaying adventures with access to technology like trains, skyscrapers, and even phones",
+            "user_id" : 1,
         },
         "Waterdeep Dragon Heist": {
-            "description" : "Waterdeep is an expansive city in the Forgotten Realms and suddenly, thousands of gold pieces have gone missing. Its your job to find whoever took them and bring the gold back to the city... or keep them"
+            "description" : "Waterdeep is an expansive city in the Forgotten Realms and suddenly, thousands of gold pieces have gone missing. Its your job to find whoever took them and bring the gold back to the city... or keep them",
+            "user_id" : 2,
         },
         "Curse of Strahd" : {
-            "description" : "Ravenloft has been cursed for centuries, overseen by the vampiric dictator, Von Strahd. Will you be able to escape the mist surrounding the valley or will you succumb to the curse of strahd"
+            "description" : "Ravenloft has been cursed for centuries, overseen by the vampiric dictator, Von Strahd. Will you be able to escape the mist surrounding the valley or will you succumb to the curse of strahd",
+            "user_id" : 2,
         }
     }
 
@@ -21,7 +24,7 @@ def seed_campaigns():
 
     db.session.commit()
 
-def undo_characters():
+def undo_campaigns():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.characters RESTART IDENTITY CASCADE;")
     else:
