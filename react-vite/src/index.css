@@ -56,24 +56,10 @@ li {
     list-style: none;
 }
 
-.main-div {
-    flex: 1 0 auto;
-}
+
 footer {
     flex-shrink: 0;
     padding-bottom: 20px
-}
-
-#root {
-    display: flex;
-    flex-direction: column;
-}
-/* error messages */
-.errors-msgs {
-    color: red;
-    font-size: .74rem;
-    font-weight: 500;
-
 }
 
 .first-color {
@@ -92,6 +78,22 @@ footer {
 	color: #000000;
 }
 
+/* #root {
+    display: flex;
+    flex-direction: column;
+} */
+/* error messages */
+.errors-msgs {
+    color: red;
+    font-size: .74rem;
+    font-weight: 500;
+
+}
+
 .loading {
     margin: 16% 45%;
+}
+
+.main-div {
+    flex: 1 0 auto;
 }
