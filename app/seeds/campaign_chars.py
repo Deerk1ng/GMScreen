@@ -3,14 +3,22 @@ from app.models import db, environment, SCHEMA, Campaign_character
 from sqlalchemy.sql import text
 
 def seed_campaign_chars():
-    campaign_characters = {
-
-    }
-
-    for name, attributes in campaign_characters.items():
-        campaign_char = Campaign_character(name=name, **attributes)
-        db.session.add(campaign_char)
-
+    # demo1 = Campaign_character(
+    #     character_id= 1, campaign_id = 2
+    # )
+    # demo2 = Campaign_character(
+    #     character_id= 1, campaign_id = 3
+    # )
+    # demo3 = Campaign_character(
+    #     character_id= 2, campaign_id = 1
+    # )
+    # demo4 = Campaign_character(
+    #     character_id= 3, campaign_id = 1
+    # )
+    # db.session.add(demo1)
+    # db.session.add(demo2)
+    # db.session.add(demo3)
+    # db.session.add(demo4)
     db.session.commit()
 
 def undo_campaign_chars():
