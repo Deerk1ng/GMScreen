@@ -18,7 +18,7 @@ const LandingPage = () => {
         <div className='main-div land-main'>
             <h1 className='third-color'>Welcome to Guild Meet</h1>
             <div>
-                <div className='land-desc'>Guild meet is a website designed to make planning for your nerdy events easy. Schedule events that your group mates can sign up to attend. In the future, campaign groups will be implemented, allowing for a more exclusive membership status and for private usage of the schedule feature. </div>
+                <div className='land-desc'>Guild meet is a website designed to make planning for your nerdy events easy.</div>
                 <OpenModalButton
                     buttonText="Sign Up"
                     modalComponent={<SignupFormModal />}
@@ -27,6 +27,11 @@ const LandingPage = () => {
                     buttonText="Log in or Use A Demo account"
                     modalComponent={<LoginFormModal />}
                 />
+            </div>
+            <div>
+                <div className='land-desc'>Create a Campaign</div>
+                <div className='land-desc'>Join your friends.</div>
+                <div className='land-desc'>Schedule events.</div>
             </div>
             <div className='land-mod'>
                 <h2 className='land-head'>Register Today</h2>
