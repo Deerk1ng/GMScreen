@@ -30,8 +30,11 @@ const LandingPage = () => {
             </div>
             <div>
                 <div className='land-desc'>Create a Campaign</div>
+                <div>Create campaigns for your players to join</div>
                 <div className='land-desc'>Join your friends.</div>
+                <div>Create characters and join other's campaigns as you see fit</div>
                 <div className='land-desc'>Schedule events.</div>
+                <div>Plan events or choose to attend any events available to your campaign</div>
             </div>
             <div className='land-mod'>
                 <h2 className='land-head'>Register Today</h2>
