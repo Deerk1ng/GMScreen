@@ -3,8 +3,7 @@
     width: 80%;
     text-align: center;
 }
-
-.land-desc {
+.land-main-desc {
     margin: auto;
     width: 60%;
     margin-top: 30px;
@@ -24,4 +23,19 @@
 
 .land-head {
     background-color: #d7dcdf;
+}
+
+.land-triple {
+    display: flex;
+    flex-direction: row;
+
+}
+.land-desc {
+    margin: auto;
+    margin-top: 30px;
+    width: 25%;
+    font-size: larger;
+    border-color: #d7dcdf;
+    border: 2px solid;
+    padding: 25px;
 }
