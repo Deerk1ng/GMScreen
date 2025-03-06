@@ -29,14 +29,14 @@ const LandingPage = () => {
                 />
             </div>
             <div className='land-triple'>
-                <div className='land-desc'>Create a Campaign
-                    <div>Create campaigns for your players to join</div>
+                <div className='land-desc b-text'>Create a Campaign
+                    <div className='b-text'>Create campaigns for your players to join</div>
                 </div>
-                <div className='land-desc'>Join your friends.
-                    <div>Create characters and join other's campaigns as you see fit</div>
+                <div className='land-desc b-text'>Join your friends.
+                    <div className='b-text'>Create characters and join other's campaigns as you see fit</div>
                 </div>
-                <div className='land-desc'>Schedule events.
-                  <div>Plan events or choose to attend any events available to your campaign</div>
+                <div className='land-desc b-text'>Schedule events.
+                  <div className='b-text'>Plan events or choose to attend any events available to your campaign</div>
                 </div>
             </div>
             <div className='land-mod'>

@@ -38,4 +38,10 @@
     border-color: #d7dcdf;
     border: 2px solid;
     padding: 25px;
+    border-radius: 20px;
+    background-color: #d7dcdf;
+}
+
+.b-text {
+    color: black;
 }
