@@ -24,7 +24,7 @@ const LandingPage = () => {
                     modalComponent={<SignupFormModal />}
                 />
                 <OpenModalButton
-                    buttonText="Log in or Use A Demo account"
+                    buttonText="Log in"
                     modalComponent={<LoginFormModal />}
                 />
             </div>
@@ -46,7 +46,7 @@ const LandingPage = () => {
                     modalComponent={<SignupFormModal />}
                 />
                 <OpenModalButton
-                    buttonText="Log in or Use A Demo account"
+                    buttonText="Log in"
                     modalComponent={<LoginFormModal />}
                 />
             </div>
