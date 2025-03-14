@@ -38,4 +38,11 @@
     border-color: #d7dcdf;
     border: 2px solid;
     padding: 25px;
+    border-radius: 20px;
+    background-color: #d7dcdf;
+    box-shadow: #323643;
+}
+
+.b-text {
+    color: black;
 }
