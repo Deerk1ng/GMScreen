@@ -36,11 +36,11 @@
     width: 25%;
     font-size: larger;
     border-color: #d7dcdf;
-    border: 2px solid;
+    /* border: 1px solid; */
     padding: 25px;
     border-radius: 20px;
     background-color: #d7dcdf;
-    box-shadow: #323643;
+    box-shadow: #f7f8f8;
 }
 
 .b-text {
