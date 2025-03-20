@@ -6,7 +6,18 @@
     font-weight: normal;
     font-family: "Montserrat", sans-serif;
     font-style: normal;
-    color: #f7f7f7;
+
+    --margin-xxs: .25rem;
+    --margin-xs: .5rem;
+    --margin-s: .75rem;
+    --margin-m: 1rem;
+    --margin-l: 1.25rem;
+    --margin-xl: 1.5rem;
+    --margin-xxl: 1.75rem;
+    --main-color: white;
+    --contrast-color: black;
+    --accent-color-1: purple;
+    --accent-color-2: blue;
 }
 html, body {
     height: 100%;
