@@ -44,5 +44,5 @@
 }
 
 .b-text {
-    color: black;
+    color: var(--contrast-color);
 }

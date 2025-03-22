@@ -6,6 +6,7 @@
     font-weight: normal;
     font-family: "Montserrat", sans-serif;
     font-style: normal;
+    color: var(--contrast-color);
 
     --margin-xxs: .25rem;
     --margin-xs: .5rem;
@@ -23,7 +24,7 @@ html, body {
     height: 100%;
 }
 body {
-    background-color: #404450;
+    background-color: var(--main-color);
     margin: 50px;
     scroll-behavior: smooth;
     display: flex;
@@ -45,9 +46,9 @@ button {
     font-size: normal;
     text-align: center;
     cursor: pointer;
-    background-color: #4a5064;
+    background-color: var(--accent-color-1);
     border-color: #606470;
-    color: #f7f7f7;
+    color: var(--accent-color-2);
     border-radius: 5px;
 
     margin: 5px;
