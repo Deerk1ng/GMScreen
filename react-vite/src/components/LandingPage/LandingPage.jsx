@@ -8,11 +8,22 @@ import { useEffect } from 'react';
 
 const LandingPage = () => {
     const user = useSelector(state => state.session.user)
+    const [currImg, setCurrImg] = useState(1);
     const navigate = useNavigate()
 
     useEffect(() => {
         if(user) navigate('/events')
     }, [user])
+
+    const change_img = (currImg) => {
+        if (currImg == 1){
+            setCurrImg(2)
+        } else if (currImg == 2){
+            setCurrImg(3)
+        } else {
+            setCurrImg(1)
+        }
+    }
 
     return (
         <div className='main-div land-main'>
