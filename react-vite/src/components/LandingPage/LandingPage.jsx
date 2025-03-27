@@ -16,12 +16,22 @@ const LandingPage = () => {
     }, [user])
 
     const change_img = (currImg) => {
+        if (currImg > 3) setCurrImg(1)
         if (currImg == 1){
-            setCurrImg(2)
+            return (
+                    <div className='land-desc b-text'>Create a Campaign
+                        <div className='b-text'>Create campaigns to bring your group to life.</div>
+                    </div>)
         } else if (currImg == 2){
-            setCurrImg(3)
+            return (
+                <div className='land-desc b-text'>Join your friends.
+                    <div className='b-text'>Create characters and join other's campaigns as you see fit</div>
+                </div>)
         } else {
-            setCurrImg(1)
+            return (
+                <div className='land-desc b-text'>Schedule events.
+                  <div className='b-text'>Plan events or choose to attend any events available to your campaign</div>
+                </div>)
         }
     }
 
@@ -40,15 +50,7 @@ const LandingPage = () => {
                 />
             </div>
             <div className='land-triple'>
-                <div className='land-desc b-text'>Create a Campaign
-                    <div className='b-text'>Create campaigns to bring your group to life.</div>
-                </div>
-                <div className='land-desc b-text'>Join your friends.
-                    <div className='b-text'>Create characters and join other's campaigns as you see fit</div>
-                </div>
-                <div className='land-desc b-text'>Schedule events.
-                  <div className='b-text'>Plan events or choose to attend any events available to your campaign</div>
-                </div>
+                {currImg ? change_img() : <></> }
             </div>
             <div className='land-mod'>
                 <h2 className='land-head'>Register Today</h2>
