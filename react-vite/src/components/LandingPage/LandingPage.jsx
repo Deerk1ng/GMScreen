@@ -8,32 +8,13 @@ import { useEffect } from 'react';
 
 const LandingPage = () => {
     const user = useSelector(state => state.session.user)
-    const [currImg, setCurrImg] = useState(1);
     const navigate = useNavigate()
 
     useEffect(() => {
         if(user) navigate('/events')
     }, [user])
 
-    const change_img = (currImg) => {
-        if (currImg > 3) setCurrImg(1)
-        if (currImg == 1){
-            return (
-                    <div className='land-desc b-text'>Create a Campaign
-                        <div className='b-text'>Create campaigns to bring your group to life.</div>
-                    </div>)
-        } else if (currImg == 2){
-            return (
-                <div className='land-desc b-text'>Join your friends.
-                    <div className='b-text'>Create characters and join other's campaigns as you see fit</div>
-                </div>)
-        } else {
-            return (
-                <div className='land-desc b-text'>Schedule events.
-                  <div className='b-text'>Plan events or choose to attend any events available to your campaign</div>
-                </div>)
-        }
-    }
+
 
     return (
         <div className='main-div land-main'>
@@ -50,7 +31,18 @@ const LandingPage = () => {
                 />
             </div>
             <div className='land-triple'>
-                {currImg ? change_img() : <></> }
+                    <div className='land-desc b-text'>Create a Campaign
+                        <div>add image here</div>
+                        <div className='b-text'>Create campaigns to bring your group to life.</div>
+                    </div>
+                    <div className='land-desc b-text'>Join your friends.
+                        <div>add image here</div>
+                        <div className='b-text'>Create characters and join other's campaigns as you see fit</div>
+                    </div>
+                    <div className='land-desc b-text'>Schedule events.
+                        <div>add image here</div>
+                        <div className='b-text'>Plan events or choose to attend any events available to your campaign</div>
+                    </div>
             </div>
             <div className='land-mod'>
                 <h2 className='land-head'>Register Today</h2>
