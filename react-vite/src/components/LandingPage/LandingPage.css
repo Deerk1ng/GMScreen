@@ -12,17 +12,17 @@
 
 .land-mod {
     margin-top: 100px;
-    border: 5px solid #d7dcdf;
+    border: 5px solid var(--contrast-color);
     margin: 50px auto;
     width: 25%;
     padding: 20px;
     display: flex;
     flex-direction: column;
-    background-color: #323643;
+    background-color: var(--main-color);
 }
 
 .land-head {
-    background-color: #d7dcdf;
+    background-color: var(--contrast-color);
 }
 
 .land-triple {
@@ -35,12 +35,12 @@
     margin-top: 30px;
     width: 25%;
     font-size: larger;
-    border-color: #d7dcdf;
+    border-color: var(--accent-color-2);
     /* border: 1px solid; */
     padding: 25px;
     border-radius: 20px;
-    background-color: #d7dcdf;
-    box-shadow: #f7f8f8;
+    background-color: var(--accent-color-1);
+    box-shadow: var(--contrast-color);
 }
 
 .b-text {
