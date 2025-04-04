@@ -12,8 +12,8 @@
 }
 
 .delete-button {
-    background-color: #93deff;
-    border-color: #93deff;
+    background-color: var(--accent-color-1);
+    border-color: var(--accent-color-1);
     color: #ffffff;
     padding: 5px;
     width: 80%;
@@ -22,9 +22,9 @@
 
 .keep-button {
     padding: 5px;
-    border-color: #999999;
-    color: #ffffff;
-    background-color: #999999;
+    border-color: var(--accent-color-2);
+    color: var(--contrast-color);
+    background-color: var(--accent-color-2);
     width: 80%;
     margin: 20px 0px;
 }

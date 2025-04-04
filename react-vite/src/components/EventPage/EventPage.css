@@ -19,9 +19,9 @@
 .container {
     justify-content: space-between;
     margin: 5px 0px;
-    border-bottom: 2px solid #606470;
-    border-right: 2px solid #606470;
-    box-shadow: 10px 5px 5px #606470;
+    border-bottom: 2px solid var(--accent-color-2);
+    border-right: 2px solid var(--accent-color-2);
+    box-shadow: 10px 5px 5px var(--accent-color-2);
     border-radius: 5px;
     padding: 20px 20px 10px 20px;
 }
@@ -55,7 +55,7 @@
     margin-right: 25px;
 }
 .attendee-box {
-    border: 2px solid #606470;
+    border: 2px solid var(--accent-color-2);
     margin: 5px 0px;
     padding: 5px;
     height: 90px;
