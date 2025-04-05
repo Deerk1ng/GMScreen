@@ -9,7 +9,7 @@
 
 .log-inp {
     margin-left: 0px;
-    color: #323643;
+    color: var(--main-color);
 }
 
 .log-bttn {
