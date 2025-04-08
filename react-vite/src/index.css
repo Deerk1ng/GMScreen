@@ -48,7 +48,7 @@ button {
     cursor: pointer;
     background-color: var(--accent-color-1);
     border-color: #606470;
-    color: var(--accent-color-2);
+    color: var(--contrast-color);
     border-radius: 5px;
 
     margin: 5px;
