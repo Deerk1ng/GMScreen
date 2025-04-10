@@ -32,16 +32,16 @@ const LandingPage = () => {
             </div>
             <div className='land-triple'>
                     <div className='land-desc b-text'>Create a Campaign
-                        <div>add image here</div>
-                        <div className='b-text'>Create campaigns to bring your group to life.</div>
+                        {/* <div>add image here</div> */}
+                        <div className='b-text'>Create campaigns to invite your friends and bring them together. Campaigns will be able to create events and have multiple group members join</div>
                     </div>
                     <div className='land-desc b-text'>Join your friends.
-                        <div>add image here</div>
-                        <div className='b-text'>Create characters and join other's campaigns as you see fit</div>
+                        {/* <div>add image here</div> */}
+                        <div className='b-text'>Create characters and join other's campaigns as you see fit. Characters will be able to join as many campaigns as they'd like, each being separate groups to allow for socializing and organization</div>
                     </div>
                     <div className='land-desc b-text'>Schedule events.
-                        <div>add image here</div>
-                        <div className='b-text'>Plan events or choose to attend any events available to your campaign</div>
+                        {/* <div>add image here</div> */}
+                        <div className='b-text'>Plan events or choose to attend any events available to your campaign. Anyone will be able to create an event and all members will be able to mark themselves as Attending, Unsure, or Not Attending.</div>
                     </div>
             </div>
             <div className='land-mod'>
