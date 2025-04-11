@@ -49,9 +49,9 @@
 
 /* Social Media Section */
 .social-media {
-    margin: 5px 0 0 0;
+    margin: var(--margin-s) 0 0 0;
     display: flex;
-    gap: 3px;
+    gap: var(--margin-xs);
     justify-content: start;
     flex-direction: row;
     padding: 0;

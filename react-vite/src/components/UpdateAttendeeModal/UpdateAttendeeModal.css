@@ -1,7 +1,7 @@
 .attendee-modal {
     display: flex;
     flex-direction: column;
-    margin: 20px;
+    margin: var(--margin-xxl);
     background-color: var(--main-color);
 }
 
@@ -16,7 +16,7 @@
 }
 
 .prod-name {
-    margin: 10px;
+    margin: var(--margin-xl);
     font-size: x-large;
 }
 
@@ -33,9 +33,9 @@
 
 .attending-button {
     display: flex;
-    margin-top: 20px;
+    margin-top: var(--margin-xxl);
     width: 40%;
-    margin: 20px auto ;
+    margin: var(--margin-xxl) auto ;
     justify-content: center;
     background-color: var(--accent-color-1);
     color: var(--main-color);

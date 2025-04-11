@@ -13,7 +13,7 @@
 }
 
 .log-bttn {
-    margin: 10px;
+    margin: var(--margin-l);
 }
 
 .demo-button {
