@@ -11,7 +11,7 @@
 }
 
 .profile-dropdown > * {
-  margin: 5px;
+  margin: var(--margin-l);
 }
 .profile-items {
   display: flex;
@@ -19,14 +19,14 @@
   padding: 3px;
 }
 .profile-items > * {
-  margin: 3px 0px;
+  margin: var(--margin-m) 0px;
   padding-bottom: 3px
 }
 
 /* Logo */
 #logo-img {
   width: 300px;
-  margin: 10px 50px;
+  margin: var(--margin-xl) 50px;
 }
 
 
@@ -44,7 +44,7 @@
 /* Profile Picture Icon */
 .pfp {
   font-size: 25px;
-  margin: 5px;
+  margin: var(--margin-l);
 }
 
 .user-name {

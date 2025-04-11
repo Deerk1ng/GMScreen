@@ -39,7 +39,7 @@ h1 {
 h2 {
     font-size: 20pt;
     font-weight: bold;
-    margin: 5px 0px
+    margin: var(--margin-s) 0px
 }
 
 button {
@@ -51,7 +51,7 @@ button {
     color: var(--contrast-color);
     border-radius: 5px;
 
-    margin: 5px;
+    margin: var(--margin-s);
 }
 button:disabled {
     cursor:default;
@@ -71,7 +71,7 @@ li {
 
 footer {
     flex-shrink: 0;
-    padding-bottom: 20px
+    padding-bottom: var(--margin-xxl)
 }
 
 .first-color {
@@ -96,7 +96,7 @@ footer {
 } */
 /* error messages */
 .errors-msgs {
-    color: red;
+    color: var(--accent-color-1);
     font-size: .74rem;
     font-weight: 500;
 
