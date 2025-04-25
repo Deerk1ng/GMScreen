@@ -10,14 +10,14 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 10px 0px;
+    margin: var(--margin-m) 0px;
     border: 2px solid;
     border-radius: 10px;
-    padding: 20px;
+    padding: var(--margin-l);
 }
 
 .event-container > div {
-    margin-top: 10px;
+    margin-top: var(--margin-m);
 }
 
 .event-dates {
@@ -29,7 +29,7 @@
     width: 200px;
     height: 150px;
     object-fit: contain;
-    margin-right: 25px;
+    margin-right: var(--margin-xl);
 }
 
 .event-container {
@@ -41,8 +41,8 @@
     flex-direction: column;
     justify-content: center;
     width: 15%;
-    margin-left: 15px;
-    margin-right: 25px;
+    margin-left: var(--margin-l);
+    margin-right: var(--margin-xl);
 }
 
 .attendance {

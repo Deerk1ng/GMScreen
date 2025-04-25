@@ -15,7 +15,7 @@
     border: 5px solid var(--accent-color-2);
     margin: 50px auto;
     width: 25%;
-    padding: 20px;
+    padding: var(--margin-xxl);
     display: flex;
     flex-direction: column;
     background-color: var(--main-color);
