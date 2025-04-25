@@ -54,6 +54,14 @@ export const router = createBrowserRouter([
             element: <CreateCharacterPage />
           },
         ]
+      }, {
+        path: "campaigns",
+        children:[
+          {
+            path: '',
+            element: <h1>Placeholder</h1>
+          }
+        ]
       }
     ],
   },
