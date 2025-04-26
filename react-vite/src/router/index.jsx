@@ -60,6 +60,14 @@ export const router = createBrowserRouter([
           {
             path: '',
             element: <h1>Placeholder</h1>
+          },
+          {
+            path:'current',
+            element: <h1>Placeholder</h1>
+          },
+          {
+            path:'event_id',
+            element: <h1>Placeholder</h1>
           }
         ]
       }
