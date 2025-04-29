@@ -8,11 +8,13 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import events_reducer from "./events";
 import characters_reducer from "./characters";
+import campaigns_reducer from "./campaigns";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   events: events_reducer,
-  characters: characters_reducer
+  characters: characters_reducer,
+  campaigns: campaigns_reducer
 });
 
 let enhancer;
