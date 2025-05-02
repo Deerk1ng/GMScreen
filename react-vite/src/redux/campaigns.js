@@ -1,10 +1,23 @@
 import { csrfFetch } from "./csrf.js";
 
 const GET_CAMPS = 'campaigns/get_campaigns'
+const DEL_CAMP = 'campaigns/delete_campaigns'
+const EDIT_CAMP = 'campaigns/edit_campaigns'
 
 const get_campaigns = (campaigns) => ({
     type: GET_CAMPS,
     campaigns
+})
+
+const delete_campaigns = (campaign_id) => ({
+    type: DEL_CAMP,
+    campaign_id
+})
+
+const edit_campaigns = (campaign_id, campaign) => ({
+    type: EDIT_CAMP,
+    campaign,
+    campaign_id
 })
 
 export const get_camps_thunk = () => async (dispatch) => {
@@ -18,6 +31,14 @@ export const get_camps_thunk = () => async (dispatch) => {
     }
     return res.errors
 }
+
+export const delete_camps_thunk = (campaign_id) => async (dispatch) => {
+
+}
+export const edit_camps_thunk = (campaign_id, campaign) => async (dispatch) => {
+
+}
+
 
 const initialState = { campaigns: {} };
 function campaigns_reducer(state = initialState, action){
