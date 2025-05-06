@@ -33,10 +33,16 @@ export const get_camps_thunk = () => async (dispatch) => {
 }
 
 export const delete_camps_thunk = (campaign_id) => async (dispatch) => {
-
+    const res = await csrfFetch(`api/campaigns/${campaign_id}`, {
+        method: 'DELETE'
+    })
 }
 export const edit_camps_thunk = (campaign_id, campaign) => async (dispatch) => {
-
+    const res = await csrfFetch(`api/campaigns/${campaign_id}`, {
+        method:'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(campaign)
+    })
 }
 
 
@@ -50,6 +56,14 @@ function campaigns_reducer(state = initialState, action){
                 // add code for naturalizing results
                 new_state.campaigns[campaign.id] = campaign
             })
+            return new_state
+        case DEL_CAMP:
+            new_state = structuredClone(state)
+            delete new_state['campaigns'][action.campaign_id]
+            return new_state
+        case EDIT_CAMP:
+            new_state = structuredClone(state)
+            new_state['campaigns'][action.campaign_id] = action.campaign
             return new_state
         default:
             return state
