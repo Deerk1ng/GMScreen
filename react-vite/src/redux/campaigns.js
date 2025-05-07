@@ -36,6 +36,12 @@ export const delete_camps_thunk = (campaign_id) => async (dispatch) => {
     const res = await csrfFetch(`api/campaigns/${campaign_id}`, {
         method: 'DELETE'
     })
+
+    if (res.ok){
+        dispatch(delete_campaigns(campaign_id))
+        return res
+    }
+    else return res.errors
 }
 export const edit_camps_thunk = (campaign_id, campaign) => async (dispatch) => {
     const res = await csrfFetch(`api/campaigns/${campaign_id}`, {
