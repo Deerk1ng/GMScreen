@@ -49,6 +49,12 @@ export const edit_camps_thunk = (campaign_id, campaign) => async (dispatch) => {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(campaign)
     })
+    const data = await res.json()
+    if (res.ok){
+        let new_campaign = {...data.campaign}
+        dispatch(edit_campaigns(campaign_id, new_campaign))
+        return res
+    }
 }
 
 
