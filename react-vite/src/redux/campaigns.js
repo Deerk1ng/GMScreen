@@ -65,7 +65,6 @@ function campaigns_reducer(state = initialState, action){
         case GET_EVENTS:
             new_state = structuredClone(state)
             action.campaigns.forEach(campaign => {
-                // add code for naturalizing results
                 new_state.campaigns[campaign.id] = campaign
             })
             return new_state
