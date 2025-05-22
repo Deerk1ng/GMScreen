@@ -22,6 +22,10 @@ function Navigation() {
             <div>
               <NavLink className="nav-event" to="/characters">Character</NavLink>
             </div> : null}
+        {user && user.id ?
+            <div>
+              <NavLink className="nav-event" to="/campaigns">Campaigns</NavLink>
+            </div> : null}
       </div>
       <div>
         <ProfileButton />
