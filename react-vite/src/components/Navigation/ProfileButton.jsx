@@ -58,16 +58,7 @@ function ProfileButton() {
             </>
           ) : (
             <div className="profile-items">
-              <OpenModalMenuItem
-                itemText="Log In"
-                onItemClick={closeMenu}
-                modalComponent={<LoginFormModal />}
-              />
-              <OpenModalMenuItem
-                itemText="Sign Up"
-                onItemClick={closeMenu}
-                modalComponent={<SignupFormModal />}
-              />
+              {/*  add different campaigns here */}
             </div>
           )}
         </ul>
