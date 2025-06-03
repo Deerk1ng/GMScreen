@@ -10,6 +10,9 @@ function CampaignsButton() {
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
   const navigate = useNavigate()
+  const [userCamps, setUserCamps] = useState();
+
+
 
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
