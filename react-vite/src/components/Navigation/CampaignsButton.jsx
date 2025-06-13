@@ -33,6 +33,10 @@ function CampaignsButton() {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
+  useEffect(()=> {
+    dispatch()
+  })
+
   const closeMenu = () => setShowMenu(false);
 
   const logout = (e) => {
