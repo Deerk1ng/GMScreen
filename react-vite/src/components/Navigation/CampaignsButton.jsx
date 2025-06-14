@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaDungeon } from "react-icons/fa";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import { useNavigate } from "react-router-dom";
+import { get_camps_thunk } from "../../redux/campaigns";
 
 function CampaignsButton() {
   const dispatch = useDispatch();
@@ -32,6 +33,10 @@ function CampaignsButton() {
 
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
+
+  useEffect(()=> {
+    dispatch(get_camps_thunk())
+  }, [])
 
   const closeMenu = () => setShowMenu(false);
 
