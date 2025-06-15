@@ -11,7 +11,7 @@ function CampaignsButton() {
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
   const navigate = useNavigate()
-  const [userCamps, setUserCamps] = useState();
+  const userCamps = useSelector((store) => store.session.campaigns);
 
 
 
@@ -35,8 +35,10 @@ function CampaignsButton() {
   }, [showMenu]);
 
   useEffect(()=> {
-    dispatch(get_camps_thunk())
-  }, [])
+    if (user && user.id ){
+      dispatch(get_camps_thunk())
+    }
+  }, [user])
 
   const closeMenu = () => setShowMenu(false);
 
